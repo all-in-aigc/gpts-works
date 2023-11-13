@@ -1,5 +1,7 @@
 "use client";
 
+import { BsGithub, BsTwitter } from "react-icons/bs";
+
 import { usePathname } from "next/navigation";
 
 export default () => {
@@ -18,7 +20,7 @@ export default () => {
           GPTs Works
         </a>
         <div className="flex-1">
-          <ul className="hidden md:flex float-right text-lg text-slate-700 mr-8 items-center">
+          <ul className="hidden md:flex float-right text-lg text-slate-700 mr-4 items-center">
             <li className="mx-4">
               <a
                 href="/extension"
@@ -43,11 +45,20 @@ export default () => {
             </li>
             <li className="mx-4">
               <a
+                href="https://github.com/all-in-aigc/gpts-works"
+                target="_blank"
+                className="hover:text-[#2752f4]"
+              >
+                <BsGithub className="text-xl" />
+              </a>
+            </li>
+            <li className="mx-4">
+              <a
                 href="https://x.com/idoubicc"
                 target="_blank"
                 className="hover:text-[#2752f4]"
               >
-                Twitter
+                <BsTwitter className="text-xl" />
               </a>
             </li>
           </ul>

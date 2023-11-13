@@ -15,6 +15,7 @@
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^4.11.0",
     "react-lazy-load-image-component": "^1.6.0"
   },
   "devDependencies": {
