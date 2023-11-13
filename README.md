@@ -170,7 +170,7 @@ open `chrome://extensions/`, click `Load unpacked`
 - [fastapi](https://github.com/tiangolo/fastapi) for building index system
 - [plasmo](https://github.com/PlasmoHQ/plasmo) for browser extension development
 
-> if this project is helpful to you, you can buy me a coffee😄
+> if this project is helpful to you, buy me a coffee😄
 
-[![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=idoubi&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/idoubi)
+<a href="https://www.buymeacoffee.com/idoubi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
