@@ -1,0 +1,20 @@
+@baseUri=http://127.0.0.1:8068
+@apiKey=gsk-xxx
+
+### ping
+GET {{baseUri}}/ping
+
+### build index for gpts
+POST {{baseUri}}/gpts/index
+Content-Type: application/json
+Authorization: Bearer {{apiKey}}
+
+### search gpts
+POST {{baseUri}}/gpts/search
+Content-Type: application/json
+Authorization: Bearer {{apiKey}}
+
+{
+    "question": "I want a coding assistant"
+}
+

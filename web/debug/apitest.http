@@ -1,0 +1,12 @@
+@baseUri = http://localhost:8067/api 
+
+### update gpts
+POST {{baseUri}}/update-gpts
+
+### search gpts
+POST {{baseUri}}/search
+Content-Type: application/json
+
+{
+    "question": "I want a coding assistant"
+}

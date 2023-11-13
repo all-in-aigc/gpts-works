@@ -1,0 +1,6 @@
+**__pycache__
+.venv
+.env
+.env.prod
+storage
+index.sh
