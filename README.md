@@ -165,7 +165,7 @@ open `chrome://extensions/`, click `Load unpacked`
 
 ## Thanks to
 
-- [@airyland](https://github.com/airyland) for sharing gpts-data 
+- [GPTs Hunter](https://www.gptshunter.com) for sharing gpts-data 
 - [next.js](https://github.com/vercel/next.js) for web deployment
 - [fastapi](https://github.com/tiangolo/fastapi) for building index system
 - [plasmo](https://github.com/PlasmoHQ/plasmo) for browser extension development
