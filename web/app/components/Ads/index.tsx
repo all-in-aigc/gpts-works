@@ -11,7 +11,7 @@ export default () => {
         className="w-8 h-8"
       />
       <div className="flex flex-col items-start ml-2">
-        <div className="text-md text-[#523cec] font-bold">Monica</div>
+        <div className="text-sm text-[#523cec] font-bold">Monica</div>
         <div className="text-xs text-[#523cec] font-medium">
           All-in-one AI Assistant
         </div>
