@@ -14,6 +14,13 @@ export default ({ count }: Props) => {
             <p className="my-8 text:md md:text-4xl">
               <span className="text-[#2752f4]">{count}</span> fantastic GPTs
               stored
+              <a
+                href="https://github.com/airyland/gptshunter.com/issues/1"
+                target="_blank"
+                className="text-sm text-[#2752f4] mx-2"
+              >
+                Submit yours 👉
+              </a>
             </p>
           </h2>
         </div>
