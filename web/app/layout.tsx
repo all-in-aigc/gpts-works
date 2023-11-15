@@ -25,6 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2123767634383915"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body className={inter.className}>
         <main>
