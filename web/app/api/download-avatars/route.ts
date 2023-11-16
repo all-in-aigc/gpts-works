@@ -38,18 +38,18 @@ export async function POST() {
       }
 
       try {
-        // const res = await downloadAndUploadImage(
-        //   gpt.avatar_url,
-        //   "gpts-works",
-        //   `avatars/${gpt.uuid}.png`
-        // );
-        // const avatarCdnUrl = res.Location;
+        const res = await downloadAndUploadImage(
+          gpt.avatar_url,
+          "gpts-works",
+          `avatars/${gpt.uuid}.png`
+        );
+        const avatarUrl = res.Location;
+        await updateAvatarCdnUrl(gpt.uuid, avatarUrl);
 
-        const avatarFile = `avatars/${gpt.uuid}.png`;
-        const avatarUrl = `${process.env.GPTS_AVATAR_PATH}/${avatarFile}`;
-        await downloadImage(gpt.avatar_url, avatarUrl);
-
-        await updateAvatarCdnUrl(gpt.uuid, avatarFile);
+        // const avatarFile = `avatars/${gpt.uuid}.png`;
+        // const avatarUrl = `${process.env.GPTS_AVATAR_PATH}/${avatarFile}`;
+        // await downloadImage(gpt.avatar_url, avatarUrl);
+        // await updateAvatarCdnUrl(gpt.uuid, avatarFile);
 
         newCount += 1;
         console.log(
