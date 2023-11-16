@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.451.0",
     "@vercel/postgres": "^0.5.1",
     "@zilliz/milvus2-sdk-node": "^2.3.3",
+    "aws-sdk": "^2.1497.0",
+    "axios": "^1.6.2",
     "langchain": "^0.0.186",
     "next": "14.0.0",
     "react": "^18",
