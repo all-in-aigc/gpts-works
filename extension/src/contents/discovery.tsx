@@ -4,10 +4,12 @@ import { useEffect, useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import GptsList from "~components/GptsList"
+import Search from "~components/Search"
 import type { Gpts } from "~types/gpts"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://chat.openai.com/gpts/discovery"]
+  matches: ["https://chat.openai.com/*"]
 }
 
 export const getStyle = () => {
@@ -21,6 +23,7 @@ export const getOverlayAnchor: PlasmoGetOverlayAnchor = async () =>
 
 export default () => {
   const [gpts, setGpts] = useState<Gpts[]>([])
+  const [loading, setLoading] = useState(false)
 
   const fetchGpts = async () => {
     const resp = await sendToBackground({
@@ -55,52 +58,21 @@ export default () => {
             aria-label="close sidebar"
             className="drawer-overlay"></label>
 
-          <div className="bg-white px-4">
+          <div className="bg-slate-50 h-full text-black px-4">
             <div className="flex items-center px-4 pt-10 pb-4">
-              <h2 className="text-2xl font-bold">Third-party GPTs</h2>
+              <h2 className="text-2xl mr-2 font-bold">Third-party GPTs</h2>
               <div className="flex-1"></div>
               <a
-                className="text-[#324ffe]"
+                className="text-primary"
                 href="https://gpts.works"
                 target="_blank">
                 View more 👉
               </a>
             </div>
 
-            <ul className="menu overflow-auto text-base-content">
-              {/* Sidebar content here */}
-              {gpts.length > 0 &&
-                gpts.map((item: Gpts, idx: number) => {
-                  return (
-                    <>
-                      {item.avatar_url && item.author_name && (
-                        <li key={idx} className="max-w-[480px] overflow-hidden">
-                          <a
-                            href={item.visit_url}
-                            className="flex items-center rounded-none  border-t border-gray-100 px-2 py-4 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-transparent">
-                            <img
-                              src={item.avatar_url}
-                              className="h-10 w-10 rounded-full"
-                              alt="GPT"
-                            />
-                            <div className="max-w-[200px] flex-1 ml-2 mr-24">
-                              <h3 className="text-md font-semibold truncate">
-                                {item.name}
-                              </h3>
-                              <p className="text-sm line-clamp-2 truncate">
-                                {item.description}
-                              </p>
-                            </div>
-                            <div className="text-sm text-token-text-tertiary text-left truncate">
-                              By {item.author_name || "-"}
-                            </div>
-                          </a>
-                        </li>
-                      )}
-                    </>
-                  )
-                })}
-            </ul>
+            {/* <Search setGpts={setGpts} setLoading={setLoading} /> */}
+
+            <GptsList gpts={gpts} />
           </div>
         </div>
       </div>

@@ -7,18 +7,20 @@ import { usePathname } from "next/navigation";
 export default () => {
   const pathname = usePathname();
   return (
-    <header className="mx-auto w-full max-w-7xl px-5 py-2 md:px-10 md:pt-4 lg:pt-8">
-      <h1 className="text-3xl font-medium flex items-center">
-        <a
-          className="bg-cover bg-center px-4 py-4 text-white"
-          href="/"
-          style={{
-            backgroundImage:
-              "url('https://assets.website-files.com/63904f663019b0d8edf8d57c/6390526ac2a607693620c97b_Rectangle%2010.svg')",
-          }}
-        >
-          GPTs Works
-        </a>
+    <header className="mx-auto w-full max-w-7xl px-4 md:px-10 mt-8 md:mt-12">
+      <div className="flex items-center">
+        <h1 className="text-lg md:text-3xl font-medium ">
+          <a
+            className="bg-cover bg-center px-3 py-3 md:px-4 md:py-4 m text-white cursor-pointer"
+            href="/"
+            style={{
+              backgroundImage: "url('/brand.svg')",
+            }}
+          >
+            GPTs Works
+          </a>
+        </h1>
+
         <div className="flex-1">
           <ul className="hidden md:flex float-right text-lg text-slate-700 mr-4 items-center">
             <li className="mx-4">
@@ -82,7 +84,7 @@ export default () => {
             ></path>
           </svg>
         </a>
-      </h1>
+      </div>
     </header>
   );
 };
