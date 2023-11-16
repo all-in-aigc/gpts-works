@@ -22,6 +22,7 @@ export default ({ gpts, loading }: Props) => {
                     <div className="mb-4 flex flex-row">
                       <LazyLoadImage
                         src={item.avatar_url}
+                        placeholderSrc={`/logo.png`}
                         alt=""
                         className="mr-4 inline-block h-16 w-16 object-cover rounded-full"
                       />

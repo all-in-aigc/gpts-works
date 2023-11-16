@@ -31,8 +31,30 @@ export async function insertRow(gpts: Gpts) {
   return res;
 }
 
+export async function updateAvatarCdnUrl(uuid: string, avatarCdnUrl: string) {
+  const res =
+    await sql`UPDATE gpts SET avatar_cdn_url=${avatarCdnUrl} WHERE uuid=${uuid}`;
+
+  return res;
+}
+
 export async function getUuids(): Promise<string[]> {
   const res = await sql`SELECT uuid FROM gpts`;
+  if (res.rowCount === 0) {
+    return [];
+  }
+
+  const { rows } = res;
+  let uuids: string[] = [];
+  rows.forEach((row) => {
+    uuids.push(row.uuid);
+  });
+
+  return uuids;
+}
+
+export async function getNoAvatarCdnUrlUuids(): Promise<string[]> {
+  const res = await sql`SELECT uuid FROM gpts WHERE avatar_cdn_url = ''`;
   if (res.rowCount === 0) {
     return [];
   }

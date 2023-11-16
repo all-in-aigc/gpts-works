@@ -11,4 +11,5 @@ export interface Gpts {
   updated_at: string;
   detail?: string;
   visit_url?: string;
+  avatar_cdn_url?: string;
 }

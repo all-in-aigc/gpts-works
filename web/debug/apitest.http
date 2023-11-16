@@ -3,6 +3,9 @@
 ### update gpts
 POST {{baseUri}}/update-gpts
 
+### download avatars
+POST {{baseUri}}/download-avatars
+
 ### search gpts
 POST {{baseUri}}/search
 Content-Type: application/json
