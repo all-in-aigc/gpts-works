@@ -20,7 +20,7 @@ def search_gpts(question):
     for node in nodes:
         print("node metadata", node.metadata)
         if node.score > 0.80:
-            uuid = node.metadata['uuid']
+            uuid = node.metadata["uuid"]
             uuids.append(uuid)
             uuids_with_scores[uuid] = node.score
 
@@ -29,7 +29,7 @@ def search_gpts(question):
 
     rows = get_gpts_by_uuids(uuids)
     for row in rows:
-        gpts.append({
+        gpt = {
             "uuid": row.uuid,
             "name": row.name,
             "description": row.description,
@@ -39,9 +39,12 @@ def search_gpts(question):
             "updated_at": row.updated_at,
             "visit_url": "https://chat.openai.com/g/" + row.short_url,
             "score": uuids_with_scores[row.uuid],
-        })
+        }
 
-    sorted_gpts = sorted(gpts, key=lambda x: x['score'], reverse=True)
+        if row.avatar_cdn_url:
+            gpt["avatar_url"] = row.avatar_cdn_url
+
+        gpts.append(gpt)
+
+    sorted_gpts = sorted(gpts, key=lambda x: x["score"], reverse=True)
     return sorted_gpts
-    
-

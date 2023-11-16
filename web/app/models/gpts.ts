@@ -145,8 +145,13 @@ function formatGpts(row: QueryResultRow): Gpts {
     created_at: row.created_at,
     updated_at: row.updated_at,
     visit_url: "https://chat.openai.com/g/" + row.short_url,
+    avatar_cdn_url: row.avatar_cdn_url,
     // detail: row.detail,
   };
+
+  if (gpts.avatar_cdn_url) {
+    gpts.avatar_url = gpts.avatar_cdn_url;
+  }
 
   return gpts;
 }
