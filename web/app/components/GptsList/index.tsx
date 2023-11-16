@@ -21,7 +21,9 @@ export default ({ gpts, loading }: Props) => {
                   <div className="mb-6 gap-6 overflow-hidden rounded-2xl border border-solid border-[#7e7e7e] bg-white p-8">
                     <div className="mb-4 flex flex-row">
                       <LazyLoadImage
-                        src={item.avatar_url}
+                        src={`https://gptshub.app/_next/image?url=${encodeURIComponent(
+                          item.avatar_url
+                        )}&w=1080&q=75`}
                         alt=""
                         className="mr-4 inline-block h-16 w-16 object-cover rounded-full"
                       />
