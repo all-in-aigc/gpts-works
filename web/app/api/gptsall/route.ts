@@ -19,6 +19,7 @@ export async function POST(req: Request) {
       });
     }
   } catch (e) {
+    console.log("get all gpts failed: ", e);
     return Response.json({ code: -1, message: e });
   }
 }

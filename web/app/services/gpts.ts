@@ -52,7 +52,7 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
     });
     const res = await resp.json();
     if (res.data) {
-      return res.data;
+      return res.data.filter((gpts: Gpts) => !isGptsSensitive(gpts));
     }
   } catch (e) {
     console.log("request gpts search failed: ", e);
@@ -60,3 +60,25 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
 
   return [];
 };
+
+export function isGptsSensitive(gpts: Gpts): boolean {
+  if (!gpts.name || !gpts.author_name || !gpts.description) {
+    return true;
+  }
+
+  const sensitiveKeywords = process.env.SENSITIVE_KEYWORDS || "";
+  const keywordsArr = sensitiveKeywords.split(",");
+  for (let i = 0, l = keywordsArr.length; i < l; i++) {
+    const keyword = keywordsArr[i].trim();
+    if (
+      gpts.name.includes(keyword) ||
+      gpts.description.includes(keyword) ||
+      gpts.author_name.includes(keyword)
+    ) {
+      console.log("gpt is sensitive: ", gpts.uuid, gpts.name, keyword);
+      return true;
+    }
+  }
+
+  return false;
+}

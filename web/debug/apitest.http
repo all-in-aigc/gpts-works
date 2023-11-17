@@ -6,6 +6,18 @@ POST {{baseUri}}/update-gpts
 ### download avatars
 POST {{baseUri}}/download-avatars
 
+### get all gpts
+POST {{baseUri}}/gptsall
+Content-Type: application/json
+
+{
+    "last_id": 0,
+    "limit": 3
+}
+
+### get random gpts
+GET {{baseUri}}/gpts
+
 ### search gpts
 POST {{baseUri}}/search
 Content-Type: application/json
