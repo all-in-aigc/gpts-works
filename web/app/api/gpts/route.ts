@@ -1,7 +1,15 @@
 import { getRandRows } from "@/app/models/gpts";
 
 export async function GET() {
-  const data = await getRandRows(0, 50);
+  try {
+    const data = await getRandRows(0, 50);
 
-  return Response.json({ data: data });
+    return Response.json({ code: 0, message: "ok", data: data });
+  } catch (e) {
+    console.log("get gpts failed: ", e);
+    return Response.json({
+      code: -1,
+      message: "failed",
+    });
+  }
 }

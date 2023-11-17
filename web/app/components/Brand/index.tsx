@@ -13,7 +13,8 @@ export default ({ count }: Props) => {
             Third-party GPTs store
           </h2>
           <p className="mt-4 mb-4 md:mt-12 md:mb-8 text:lg md:text-4xl">
-            <span className="text-primary">{count}</span> fantastic GPTs stored
+            <span className="text-primary font-bold">{count}</span> fantastic
+            GPTs stored
             <a
               href="https://github.com/airyland/gptshunter.com/issues/1"
               target="_blank"

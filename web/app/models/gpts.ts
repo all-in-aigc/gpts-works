@@ -1,6 +1,7 @@
 import { QueryResultRow, sql } from "@vercel/postgres";
 
-import { Gpts } from "../types/gpts";
+import { Gpts } from "@/app/types/gpts";
+import { isGptsSensitive } from "@/app/services/gpts";
 
 export async function createTable() {
   const res = await sql`CREATE TABLE gpts (
@@ -58,7 +59,9 @@ export async function getRows(last_id: number, limit: number): Promise<Gpts[]> {
 
   rows.forEach((row) => {
     const gpt = formatGpts(row);
-    gpts.push(gpt);
+    if (gpt) {
+      gpts.push(gpt);
+    }
   });
 
   return gpts;
@@ -76,10 +79,11 @@ export async function getRandRows(
 
   const gpts: Gpts[] = [];
   const { rows } = res;
-
   rows.forEach((row) => {
     const gpt = formatGpts(row);
-    gpts.push(gpt);
+    if (gpt) {
+      gpts.push(gpt);
+    }
   });
 
   return gpts;
@@ -110,7 +114,7 @@ export async function findByUuid(uuid: string): Promise<Gpts | undefined> {
   return gpts;
 }
 
-function formatGpts(row: QueryResultRow): Gpts {
+function formatGpts(row: QueryResultRow): Gpts | undefined {
   const gpts: Gpts = {
     uuid: row.uuid,
     org_id: row.org_id,
@@ -125,6 +129,10 @@ function formatGpts(row: QueryResultRow): Gpts {
     visit_url: "https://chat.openai.com/g/" + row.short_url,
     // detail: row.detail,
   };
+
+  if (isGptsSensitive(gpts)) {
+    return;
+  }
 
   return gpts;
 }
