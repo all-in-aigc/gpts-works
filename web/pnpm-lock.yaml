@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@aws-sdk/client-s3':
     specifier: ^3.451.0
-    version: 3.451.0
+    version: 3.454.0
   '@vercel/postgres':
     specifier: ^0.5.1
     version: 0.5.1
@@ -15,15 +15,14 @@ dependencies:
     specifier: ^2.3.3
     version: 2.3.3
   aws-sdk:
-    specifier: ^2.1497.0
-    version: 2.1497.0
+    specifier: ^2.1499.0
+    version: 2.1499.0
   axios:
     specifier: ^1.6.2
     version: 1.6.2
   langchain:
     specifier: ^0.0.186
-    version: 0.0.186(@aws-sdk/client-s3@3.451.0)(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)(axios@1.6.2)
-    version: 0.0.186(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)
+    version: 0.0.186(@aws-sdk/client-s3@3.454.0)(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)(axios@1.6.2)
   moment:
     specifier: ^2.29.4
     version: 2.29.4
@@ -172,14 +171,14 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@aws-sdk/client-s3@3.451.0:
-    resolution: {integrity: sha512-wDQjG/5jEswus1JclfcWeTIwrAXfAFSPz1tvwo7mRrfDNH8UPFjKKBI9ArBBwwaWUj4ou++56CHFKhKX4ytaQw==}
+  /@aws-sdk/client-s3@3.454.0:
+    resolution: {integrity: sha512-vBx4iB1c4mEz+twMnl6angC1/IpnmXaT8L6Kl9uNiurFsb6N4tCyrJ24kECdsOSTM7ePXvE1fKst8zAh6MW5ZA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.451.0
+      '@aws-sdk/client-sts': 3.454.0
       '@aws-sdk/core': 3.451.0
       '@aws-sdk/credential-provider-node': 3.451.0
       '@aws-sdk/middleware-bucket-endpoint': 3.451.0
@@ -281,8 +280,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@aws-sdk/client-sts@3.451.0:
-    resolution: {integrity: sha512-48NcIRxWBdP1fom6RSjwn2R2u7SE7eeV3p+c4s7ukEOfrHhBxJfn3EpqBVQMGzdiU55qFImy+Fe81iA2lXq3Jw==}
+  /@aws-sdk/client-sts@3.454.0:
+    resolution: {integrity: sha512-0fDvr8WeB6IYO8BUCzcivWmahgGl/zDbaYfakzGnt4mrl5ztYaXE875WI6b7+oFcKMRvN+KLvwu5TtyFuNY+GQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
@@ -1779,8 +1778,8 @@ packages:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
 
-  /aws-sdk@2.1497.0:
-    resolution: {integrity: sha512-X8bDAMVToQ+vr3Ctizt4GRGYFhfwOQ0+dyBRTt9tyuOQ0BQQFIicBoUM6WHqGez6G2EZWPAYjBQQNj4zsCUMCw==}
+  /aws-sdk@2.1499.0:
+    resolution: {integrity: sha512-kh89lcXx7lP83uVjzRPkOueRoM8gQlep86W9+l3qCTHSLiVJuc0MiPmqCLMPlOAZil+35roFkwWIP2FJ1WcdXg==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       buffer: 4.9.2
@@ -3183,7 +3182,7 @@ packages:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
     dev: false
 
-  /langchain@0.0.186(@aws-sdk/client-s3@3.451.0)(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)(axios@1.6.2):
+  /langchain@0.0.186(@aws-sdk/client-s3@3.454.0)(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)(axios@1.6.2):
     resolution: {integrity: sha512-uXDipmw9aUrUmDNcFr2XH9ORmshWIlIb/qFKneS1K3X5upMUg7TSbaBxqV9WxuuenLUSYaoTcTy7P/pKkbqXPg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -3481,7 +3480,7 @@ packages:
         optional: true
     dependencies:
       '@anthropic-ai/sdk': 0.6.8
-      '@aws-sdk/client-s3': 3.451.0
+      '@aws-sdk/client-s3': 3.454.0
       '@vercel/postgres': 0.5.1
       '@zilliz/milvus2-sdk-node': 2.3.3
       ansi-styles: 5.2.0
