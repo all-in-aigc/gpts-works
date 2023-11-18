@@ -82,3 +82,46 @@ export function isGptsSensitive(gpts: Gpts): boolean {
 
   return false;
 }
+
+export function gptGptsPromptStarters(gpts: Gpts): string[] | undefined {
+  if (gpts.detail) {
+    try {
+      const v = gpts.detail;
+      return v["data"]["gizmo"]["display"]["prompt_starters"];
+    } catch (e) {
+      console.log("parse gpts detail failed: ", e);
+    }
+  }
+
+  return;
+}
+
+export function getGptsWelcomeMessage(gpts: Gpts): string | undefined {
+  if (gpts.detail) {
+    try {
+      const v = gpts.detail;
+      return v["data"]["gizmo"]["display"]["welcome_message"];
+    } catch (e) {
+      console.log("parse gpts detail failed: ", e);
+    }
+  }
+
+  return;
+}
+
+export function getGptsTools(gpts: Gpts): string[] | undefined {
+  if (gpts.detail) {
+    try {
+      const v = gpts.detail;
+      let tools: string[] = [];
+      v["data"]["tools"].forEach((tool: any) => {
+        tools.push(tool["type"]);
+      });
+      return tools;
+    } catch (e) {
+      console.log("parse gpts detail failed: ", e);
+    }
+  }
+
+  return;
+}

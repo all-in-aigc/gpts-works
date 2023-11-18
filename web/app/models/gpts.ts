@@ -150,11 +150,17 @@ function formatGpts(row: QueryResultRow): Gpts | undefined {
     updated_at: row.updated_at,
     visit_url: "https://chat.openai.com/g/" + row.short_url,
     avatar_cdn_url: row.avatar_cdn_url,
-    // detail: row.detail,
+    detail: row.detail,
   };
 
   if (gpts.avatar_cdn_url) {
     gpts.avatar_url = gpts.avatar_cdn_url;
+  }
+
+  try {
+    gpts.detail = JSON.parse(JSON.stringify(gpts.detail));
+  } catch (e) {
+    console.log("parse gpts detail failed: ", e);
   }
 
   if (isGptsSensitive(gpts)) {
