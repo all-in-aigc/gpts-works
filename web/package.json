@@ -12,6 +12,7 @@
     "@vercel/postgres": "^0.5.1",
     "@zilliz/milvus2-sdk-node": "^2.3.3",
     "langchain": "^0.0.186",
+    "moment": "^2.29.4",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",

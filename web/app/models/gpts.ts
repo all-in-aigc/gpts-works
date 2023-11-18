@@ -127,8 +127,13 @@ function formatGpts(row: QueryResultRow): Gpts | undefined {
     created_at: row.created_at,
     updated_at: row.updated_at,
     visit_url: "https://chat.openai.com/g/" + row.short_url,
-    // detail: row.detail,
   };
+
+  try {
+    gpts.detail = JSON.parse(JSON.stringify(row.detail));
+  } catch (e) {
+    console.log("parse gpts detail failed: ", e);
+  }
 
   if (isGptsSensitive(gpts)) {
     return;
