@@ -40,7 +40,7 @@ export default ({ setGpts, setLoading }: Props) => {
     }
 
     try {
-      const uri = "/api/search";
+      const uri = "/api/gpts/search";
       const params = {
         question: content,
       };

@@ -20,7 +20,7 @@ export default () => {
     };
 
     setLoading(true);
-    const resp = await fetch("/api/gptsall", {
+    const resp = await fetch("/api/gpts/all", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

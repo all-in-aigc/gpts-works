@@ -17,6 +17,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-lazy-load-image-component:
+    specifier: ^1.6.0
+    version: 1.6.0(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@ianvs/prettier-plugin-sort-imports':
@@ -4359,8 +4362,16 @@ packages:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
     dev: false
 
+  /lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: false
+
   /lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
+    dev: false
+
+  /lodash.throttle@4.1.1:
+    resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
     dev: false
 
   /lodash@4.17.21:
@@ -5044,6 +5055,18 @@ packages:
 
   /react-error-overlay@6.0.9:
     resolution: {integrity: sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==}
+    dev: false
+
+  /react-lazy-load-image-component@1.6.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-8KFkDTgjh+0+PVbH+cx0AgxLGbdTsxWMnxXzU5HEUztqewk9ufQAu8cstjZhyvtMIPsdMcPZfA0WAa7HtjQbBQ==}
+    peerDependencies:
+      react: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+      react-dom: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+    dependencies:
+      lodash.debounce: 4.0.8
+      lodash.throttle: 4.1.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-refresh@0.14.0:
