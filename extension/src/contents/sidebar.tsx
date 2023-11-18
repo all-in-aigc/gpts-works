@@ -1,15 +1,17 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig, PlasmoGetOverlayAnchor } from "plasmo"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
+import { useMessage } from "@plasmohq/messaging/hook"
 
 import GptsList from "~components/GptsList"
 import Search from "~components/Search"
 import type { Gpts } from "~types/gpts"
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://chat.openai.com/*"]
+  // matches: ["https://chat.openai.com/*"]
+  matches: ["<all_urls>"]
 }
 
 export const getStyle = () => {
@@ -24,33 +26,58 @@ export const getOverlayAnchor: PlasmoGetOverlayAnchor = async () =>
 export default () => {
   const [gpts, setGpts] = useState<Gpts[]>([])
   const [loading, setLoading] = useState(false)
+  const [showButton, setShowButton] = useState(true)
+  const toggleRef = useRef(null)
 
   const fetchGpts = async () => {
+    setLoading(true)
     const resp = await sendToBackground({
       name: "getGpts",
       body: {
         category: "all"
       }
     })
+    setLoading(false)
     if (resp && resp.data) {
       setGpts(resp.data)
     }
   }
 
+  useMessage<string, string>(async (req, res) => {
+    if (req.name === "showSidebar") {
+      if (toggleRef && toggleRef.current) {
+        fetchGpts()
+        toggleRef.current.checked = true
+      }
+    }
+  })
+
   useEffect(() => {
-    console.log("init contens")
-    fetchGpts()
-  }, [])
+    if (window.location.href.startsWith("https://chat.openai.com/")) {
+      fetchGpts()
+      setShowButton(true)
+    } else {
+      setShowButton(false)
+    }
+  }, [window.location.href])
 
   return (
     <div className="fixed top-0 right-0">
-      <div className="drawer drawer-end">
-        <input id="gpts-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer open drawer-end">
+        <input
+          ref={toggleRef}
+          id="gpts-drawer"
+          type="checkbox"
+          className="drawer-toggle"
+        />
         <div className="drawer-content">
-          {/* Page content here */}
-          <label htmlFor="gpts-drawer" className="text-sm btn btn-primary m-8">
-            Third-party GPTs
-          </label>
+          {showButton && (
+            <label
+              htmlFor="gpts-drawer"
+              className="text-sm btn btn-primary m-8">
+              Third-party GPTs
+            </label>
+          )}
         </div>
         <div className="drawer-side">
           <label
@@ -58,9 +85,13 @@ export default () => {
             aria-label="close sidebar"
             className="drawer-overlay"></label>
 
-          <div className="bg-slate-50 h-full text-black px-4">
+          <div className="bg-slate-50 fixed top-0 bottom-0 overflow-y-auto text-black px-4">
             <div className="flex items-center px-4 pt-10 pb-4">
-              <h2 className="text-2xl mr-2 font-bold">Third-party GPTs</h2>
+              <h2
+                className="text-2xl mr-2 font-bold cursor-pointer"
+                onClick={() => {}}>
+                Third-party GPTs
+              </h2>
               <div className="flex-1"></div>
               <a
                 className="text-primary"
@@ -70,9 +101,9 @@ export default () => {
               </a>
             </div>
 
-            {/* <Search setGpts={setGpts} setLoading={setLoading} /> */}
+            <Search setGpts={setGpts} setLoading={setLoading} />
 
-            <GptsList gpts={gpts} />
+            <GptsList gpts={gpts} loading={loading} />
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import type { Gpts } from "../types/gpts"
 
 export const getGpts = async (): Promise<Gpts[]> => {
   try {
-    const uri = "https://gpts.works/api/gpts?from=extension"
+    const uri = `${process.env.PLASMO_PUBLIC_INDEX_API_BASE_URI}/gpts/random?from=extension`
     const resp = await fetch(uri)
     if (resp.ok) {
       const json = await resp.json()
@@ -16,7 +16,7 @@ export const getGpts = async (): Promise<Gpts[]> => {
 }
 
 export const searchGpts = async (question: string): Promise<Gpts[]> => {
-  const uri = `${process.env.PLASMO_INDEX_API_BASE_URI}/gpts/search`
+  const uri = `${process.env.PLASMO_PUBLIC_INDEX_API_BASE_URI}/gpts/search`
   const data = {
     question: question
   }
@@ -27,7 +27,7 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.PLASMO_INDEX_API_KEY}`
+        Authorization: `Bearer ${process.env.PLASMO_PUBLIC_INDEX_API_KEY}`
       },
       body: JSON.stringify(data)
     })

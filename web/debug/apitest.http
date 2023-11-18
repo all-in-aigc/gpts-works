@@ -1,10 +1,10 @@
 @baseUri = http://localhost:8067/api 
 
 ### update gpts
-POST {{baseUri}}/update-gpts
+POST {{baseUri}}/process/update-gpts
 
 ### get all gpts
-POST {{baseUri}}/gptsall
+POST {{baseUri}}/gpts/all
 Content-Type: application/json
 
 {
@@ -13,10 +13,10 @@ Content-Type: application/json
 }
 
 ### get random gpts
-GET {{baseUri}}/gpts
+GET {{baseUri}}/gpts/random
 
 ### search gpts
-POST {{baseUri}}/search
+POST {{baseUri}}/gpts/search
 Content-Type: application/json
 
 {

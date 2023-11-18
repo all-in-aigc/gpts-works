@@ -1,8 +1,8 @@
 {
   "name": "gpts-works",
   "displayName": "GPTs Works",
-  "version": "1.0.2",
-  "description": "This extension is used to show Third-party GPTs in ChatGPT explore page.",
+  "version": "1.0.3",
+  "description": "Third-party GPTs store shows on browser sidebar.",
   "author": "idoubi<me@idoubi.cc>",
   "scripts": {
     "dev": "plasmo dev",
@@ -13,7 +13,8 @@
     "@plasmohq/messaging": "^0.6.0",
     "plasmo": "0.84.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-lazy-load-image-component": "^1.6.0"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",

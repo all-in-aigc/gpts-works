@@ -36,13 +36,14 @@ export default ({ setGpts, setLoading }: Props) => {
   }
 
   const searchGpts = async (question: string) => {
+    setLoading(true)
     const resp = await sendToBackground({
       name: "searchGpts",
       body: {
         question: question
       }
     })
-    console.log("searchGpts resp", resp)
+    setLoading(false)
     if (resp && resp.data) {
       setGpts(resp.data)
     } else {
@@ -60,11 +61,11 @@ export default ({ setGpts, setLoading }: Props) => {
 
   return (
     <section className="relatve">
-      <div className="mx-auto w-full max-w-3xl px-5 py-2 md:px-10 pt-2 pb-8 md:pt-4 lg:pt-4 text-center">
+      <div className="mx-auto w-full max-w-3xl px-5 py-2 md:px-4 pt-2 pb-4 md:pt-4 lg:pt-4 text-center">
         <div className="flex items-center">
           <input
             type="text"
-            className="flex-1 px-4 py-3 border-2 border-[#2752f4] bg-white rounded-lg"
+            className="flex-1 px-4 py-2 border-2 border-[#2752f4] bg-white rounded-lg"
             placeholder="chat for searching GPTs"
             ref={inputRef}
             value={content}

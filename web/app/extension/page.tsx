@@ -1,25 +1,26 @@
+import { BsDownload } from "react-icons/bs";
 import Image from "next/image";
 import extensionSrc from "@/public/extension.png";
 
 export default () => {
   return (
     <section className="relatve">
-      <div className="mx-auto w-full max-w-7xl px-5 py-2 md:px-10 pt-8 md:pt-24 lg:pt-32">
-        <h2 className="mb-4 text-3xl font-bold md:text-5xl text-center">
-          Show Third-party GPTs beside ChatGPT
-          {/* <p className="my-8">
+      <div className="mx-auto w-full max-w-7xl px-5 py-2">
+        <h2 className="mb-4 text-3xl font-bold md:text-7xl text-center mt-24">
+          Third-party GPTs shows on browser sidebar
+          <p className="mt-8">
             <a
-              href="javascript:;"
-              className="px-8 py-4 bg-[#2752f4] text-white border border-gray-100 rounded-md text-lg"
+              href="https://gpts-works.s3.us-west-1.amazonaws.com/extension/gpts-works_1.0.3.zip"
+              className="inline-block px-8 py-4 bg-slate-50 border border-primary rounded-md text-lg"
             >
-              Install Extension 👉
+              <span className="flex items-center ">
+                <BsDownload className="mr-2 font-bold" />
+                Download extension
+              </span>
             </a>
-          </p> */}
-          <p className="text-3xl font-normal pt-8 text-slate-500">
-            coming soon...
           </p>
         </h2>
-        <div className="md:pt-24">
+        <div className="md:mt-16">
           <Image src={extensionSrc} alt="extension" className="" />
         </div>
       </div>
