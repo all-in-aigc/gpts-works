@@ -11,7 +11,7 @@ export default () => {
           <p className="mt-8">
             <a
               href="https://gpts-works.s3.us-west-1.amazonaws.com/extension/gpts-works_1.0.3.zip"
-              className="inline-block px-4 md:px-8 py-2 md:py-4 bg-slate-50 border border-primary rounded-md text-lg"
+              className="inline-block px-4 md:px-8 py-2 md:py-4 bg-slate-50 border border-primary rounded-xl text-lg"
             >
               <span className="flex items-center ">
                 <BsDownload className="mr-2 font-bold" />
