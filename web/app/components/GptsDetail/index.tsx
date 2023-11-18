@@ -64,7 +64,7 @@ export default ({ gpts }: Props) => {
               <a
                 href={gpts.visit_url}
                 target="_blank"
-                className="flex items-center gap-2 rounded-md border border-solid border-black bg-primary text-white px-6 py-3"
+                className="flex items-center gap-2 rounded-md border border-solid border-black bg-primary text-white px-6 py-3 truncate"
               >
                 <BsChatDots />
                 <p>Use this GPTs on ChatGPT 👉</p>

@@ -34,8 +34,8 @@ export default ({ gpts }: Props) => {
 
       <div className="px-8 py-8">
         {welcomeMessage && (
-          <div className="flex">
-            <p className="bg-white px-4 py-2 text-sm rounded-xl">
+          <div className="hidden md:flex">
+            <p className="bg-white px-4 py-2 text-sm rounded-xl truncate">
               {welcomeMessage}
             </p>
             <div className="flex-1"></div>
@@ -48,7 +48,7 @@ export default ({ gpts }: Props) => {
           <div className="flex items-center flex-wrap">
             {promptStarters.map((v: string, idx: number) => {
               return (
-                <div className="w-1/2 px-1 py-1">
+                <div key={idx} className="w-full md:w-1/2 px-1 py-1">
                   <p className="rounded-xl text-left text-gray-700 border  border-gray-50 px-2 py-1 bg-white cursor-pointer text-sm truncate">
                     {v}
                   </p>
