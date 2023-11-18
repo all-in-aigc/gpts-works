@@ -49,7 +49,7 @@ export default ({ gpts }: Props) => {
             {promptStarters.map((v: string, idx: number) => {
               return (
                 <div key={idx} className="w-full md:w-1/2 px-1 py-1">
-                  <p className="rounded-xl text-left text-gray-700 border  border-gray-50 px-2 py-1 bg-white cursor-pointer text-sm truncate">
+                  <p className="rounded-xl text-left text-gray-700 border  border-gray-50 px-2 py-1 bg-white text-sm truncate">
                     {v}
                   </p>
                 </div>
@@ -59,6 +59,7 @@ export default ({ gpts }: Props) => {
         )}
         <input
           type="text"
+          disabled
           placeholder={`Message ${gpts.name}…`}
           className="w-full mt-4 text-sm bg-white border border-primary rounded-xl px-4 py-2"
         />
