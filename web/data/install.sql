@@ -1,3 +1,4 @@
+
 CREATE TABLE gpts (
     id SERIAL PRIMARY KEY,
     uuid VARCHAR(255) UNIQUE NOT NULL,
@@ -12,5 +13,7 @@ CREATE TABLE gpts (
     updated_at timestamptz,
     detail JSON,
     index_updated_at INT NOT NULL DEFAULT 0,
-    avatar_cdn_url VARCHAR(255) NOT NULL DEFAULT ''
+    is_recommended BOOLEAN,
+    sort INTEGER NOT NULL DEFAULT 0,
+    rating SMALLINT
 );

@@ -3,6 +3,7 @@
 import { Gpts } from "@/app/types/gpts";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Link from "next/link";
+import moment from "moment";
 
 interface Props {
   gpts: Gpts[];
@@ -36,6 +37,23 @@ export default ({ gpts, loading }: Props) => {
                     <p className="mb-4 text-sm text-[#636262]">
                       {item.description}
                     </p>
+
+                    <div className="flex items-center">
+                      {item.rating &&
+                        Array.from({ length: 5 }).map((_, idx: number) => (
+                          <img
+                            key={idx}
+                            src="/star.svg"
+                            alt=""
+                            className="mr-1.5 inline-block w-4 flex-none"
+                          />
+                        ))}
+                      <div className="flex-1"></div>
+
+                      <p className="text-slate-500 text-sm">
+                        {moment(item.created_at).fromNow()}
+                      </p>
+                    </div>
                   </div>
                 </Link>
               );

@@ -62,18 +62,14 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
 };
 
 export function isGptsSensitive(gpts: Gpts): boolean {
-  if (!gpts.name || !gpts.author_name || !gpts.description) {
-    return true;
-  }
-
   const sensitiveKeywords = process.env.SENSITIVE_KEYWORDS || "";
   const keywordsArr = sensitiveKeywords.split(",");
   for (let i = 0, l = keywordsArr.length; i < l; i++) {
     const keyword = keywordsArr[i].trim();
     if (
-      gpts.name.includes(keyword) ||
-      gpts.description.includes(keyword) ||
-      gpts.author_name.includes(keyword)
+      (gpts.name && gpts.name.includes(keyword)) ||
+      (gpts.author_name && gpts.author_name.includes(keyword)) ||
+      (gpts.description && gpts.description.includes(keyword))
     ) {
       console.log("gpt is sensitive: ", gpts.uuid, gpts.name, keyword);
       return true;

@@ -12,4 +12,5 @@ export interface Gpts {
   detail?: any;
   visit_url?: string;
   avatar_cdn_url?: string;
+  rating?: number;
 }
