@@ -11,5 +11,8 @@ CREATE TABLE gpts (
     created_at timestamptz,
     updated_at timestamptz,
     detail JSON,
-    index_updated_at INT NOT NULL DEFAULT 0
+    index_updated_at INT NOT NULL DEFAULT 0,
+    is_recommended BOOLEAN,
+    sort INTEGER NOT NULL DEFAULT 0,
+    rating SMALLINT
 );

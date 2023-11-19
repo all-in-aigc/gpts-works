@@ -1,4 +1,4 @@
-import { QueryResultRow, sql } from "@vercel/postgres";
+import { QueryResult, QueryResultRow, sql } from "@vercel/postgres";
 
 import { Gpts } from "@/app/types/gpts";
 import { isGptsSensitive } from "@/app/services/gpts";
@@ -73,23 +73,41 @@ export async function getRandRows(
 ): Promise<Gpts[]> {
   const res =
     await sql`SELECT * FROM gpts WHERE id > ${last_id} ORDER BY RANDOM() LIMIT ${limit}`;
-  if (res.rowCount === 0) {
-    return [];
-  }
 
-  const gpts: Gpts[] = [];
-  const { rows } = res;
-  rows.forEach((row) => {
-    const gpt = formatGpts(row);
-    if (gpt) {
-      gpts.push(gpt);
-    }
-  });
-
-  return gpts;
+  return getGptsFromSqlResult(res);
 }
 
-export async function getCount(): Promise<number> {
+export async function getLatestRows(
+  last_id: number,
+  limit: number
+): Promise<Gpts[]> {
+  const res =
+    await sql`SELECT * FROM gpts WHERE id > ${last_id} ORDER BY created_at DESC LIMIT ${limit}`;
+
+  return getGptsFromSqlResult(res);
+}
+
+export async function getRecommendedRows(
+  last_id: number,
+  limit: number
+): Promise<Gpts[]> {
+  const res =
+    await sql`SELECT * FROM gpts WHERE is_recommended=true AND id > ${last_id} ORDER BY sort DESC LIMIT ${limit}`;
+
+  return getGptsFromSqlResult(res);
+}
+
+export async function getHotRows(
+  last_id: number,
+  limit: number
+): Promise<Gpts[]> {
+  const res =
+    await sql`SELECT * FROM gpts WHERE rating IS NOT null AND id > ${last_id} ORDER BY rating DESC, sort DESC LIMIT ${limit}`;
+
+  return getGptsFromSqlResult(res);
+}
+
+export async function getTotalCount(): Promise<number> {
   const res = await sql`SELECT count(1) as count FROM gpts LIMIT 1`;
   if (res.rowCount === 0) {
     return 0;
@@ -114,6 +132,23 @@ export async function findByUuid(uuid: string): Promise<Gpts | undefined> {
   return gpts;
 }
 
+function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
+  if (res.rowCount === 0) {
+    return [];
+  }
+
+  const gpts: Gpts[] = [];
+  const { rows } = res;
+  rows.forEach((row) => {
+    const gpt = formatGpts(row);
+    if (gpt) {
+      gpts.push(gpt);
+    }
+  });
+
+  return gpts;
+}
+
 function formatGpts(row: QueryResultRow): Gpts | undefined {
   const gpts: Gpts = {
     uuid: row.uuid,
@@ -127,6 +162,7 @@ function formatGpts(row: QueryResultRow): Gpts | undefined {
     created_at: row.created_at,
     updated_at: row.updated_at,
     visit_url: "https://chat.openai.com/g/" + row.short_url,
+    rating: row.rating,
   };
 
   try {
