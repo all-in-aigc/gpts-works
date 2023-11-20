@@ -13,19 +13,10 @@ export const getGptsFromFile = async (): Promise<Gpts[]> => {
 
     let gpts: Gpts[] = [];
     jsonData.map((v: any) => {
-      gpts.push({
-        uuid: v["data"]["gizmo"]["id"],
-        org_id: v["data"]["gizmo"]["organization_id"],
-        name: v["data"]["gizmo"]["display"]["name"],
-        description: v["data"]["gizmo"]["display"]["description"],
-        avatar_url: v["data"]["gizmo"]["display"]["profile_picture_url"],
-        short_url: v["data"]["gizmo"]["short_url"],
-        author_id: v["data"]["gizmo"]["author"]["user_id"],
-        author_name: v["data"]["gizmo"]["author"]["display_name"],
-        created_at: v["created_at"],
-        updated_at: v["data"]["gizmo"]["updated_at"],
-        detail: JSON.stringify(v),
-      });
+      const gpt = formatGptsFromJson(v);
+      if (gpt) {
+        gpts.push(gpt);
+      }
     });
 
     return gpts;
@@ -59,6 +50,36 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
   }
 
   return [];
+};
+
+export const fetchGpts = async (
+  visit_url: string
+): Promise<Gpts | undefined> => {
+  const uri = `${process.env.WEB_API_BASE_URI}/api/gpts/fetch`;
+  const data = {
+    visit_url: visit_url,
+  };
+
+  console.log("fetch gpts", uri, data);
+
+  try {
+    const resp = await fetch(uri, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.WEB_API_KEY}`,
+      },
+      body: JSON.stringify(data),
+    });
+    const res = await resp.json();
+    if (res.data) {
+      return res.data;
+    }
+  } catch (e) {
+    console.log("request fetch gpts failed: ", e);
+  }
+
+  return;
 };
 
 export function isGptsSensitive(gpts: Gpts): boolean {
@@ -120,4 +141,25 @@ export function getGptsTools(gpts: Gpts): string[] | undefined {
   }
 
   return;
+}
+
+export function formatGptsFromJson(v: any): Gpts | undefined {
+  try {
+    return {
+      uuid: v["data"]["gizmo"]["id"],
+      org_id: v["data"]["gizmo"]["organization_id"],
+      name: v["data"]["gizmo"]["display"]["name"],
+      description: v["data"]["gizmo"]["display"]["description"],
+      avatar_url: v["data"]["gizmo"]["display"]["profile_picture_url"],
+      short_url: v["data"]["gizmo"]["short_url"],
+      author_id: v["data"]["gizmo"]["author"]["user_id"],
+      author_name: v["data"]["gizmo"]["author"]["display_name"],
+      created_at: v["created_at"],
+      updated_at: v["data"]["gizmo"]["updated_at"],
+      detail: JSON.stringify(v),
+    };
+  } catch (e) {
+    console.log("format gpts from json failed: ", e);
+    return;
+  }
 }

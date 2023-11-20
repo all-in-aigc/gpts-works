@@ -149,7 +149,7 @@ function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
   return gpts;
 }
 
-function formatGpts(row: QueryResultRow): Gpts | undefined {
+export function formatGpts(row: QueryResultRow): Gpts | undefined {
   const gpts: Gpts = {
     uuid: row.uuid,
     org_id: row.org_id,

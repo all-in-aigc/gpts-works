@@ -22,3 +22,19 @@ Content-Type: application/json
 {
     "question": "I want a coding assistant"
 }
+
+### fetch gpts
+POST {{baseUri}}/gpts/fetch
+Content-Type: application/json
+
+{
+    "visit_url": "https://chat.openai.com/g/g-EBKM6RsBl"
+}
+
+### submit gpts
+POST {{baseUri}}/gpts/submit
+Content-Type: application/json
+
+{
+    "visit_url": "https://chat.openai.com/g/g-EBKM6RsBl"
+}

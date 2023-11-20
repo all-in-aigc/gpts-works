@@ -16,13 +16,16 @@ dependencies:
     version: 4.4.2(postcss@8.4.31)
   langchain:
     specifier: ^0.0.186
-    version: 0.0.186(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)
+    version: 0.0.186(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)(playwright@1.40.0)
   moment:
     specifier: ^2.29.4
     version: 2.29.4
   next:
     specifier: 14.0.0
     version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
+  playwright:
+    specifier: ^1.40.0
+    version: 1.40.0
   react:
     specifier: ^18
     version: 18.2.0
@@ -1645,6 +1648,14 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
+  /fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2136,7 +2147,7 @@ packages:
     resolution: {integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==}
     dev: false
 
-  /langchain@0.0.186(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3):
+  /langchain@0.0.186(@vercel/postgres@0.5.1)(@zilliz/milvus2-sdk-node@2.3.3)(playwright@1.40.0):
     resolution: {integrity: sha512-uXDipmw9aUrUmDNcFr2XH9ORmshWIlIb/qFKneS1K3X5upMUg7TSbaBxqV9WxuuenLUSYaoTcTy7P/pKkbqXPg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -2452,6 +2463,7 @@ packages:
       openapi-types: 12.1.3
       p-queue: 6.6.2
       p-retry: 4.6.2
+      playwright: 1.40.0
       uuid: 9.0.1
       yaml: 2.3.4
       zod: 3.22.4
@@ -2973,6 +2985,22 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
     dev: true
+
+  /playwright-core@1.40.0:
+    resolution: {integrity: sha512-fvKewVJpGeca8t0ipM56jkVSU6Eo0RmFvQ/MaCQNDYm+sdvKkMBBWTE1FdeMqIdumRaXXjZChWHvIzCGM/tA/Q==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dev: false
+
+  /playwright@1.40.0:
+    resolution: {integrity: sha512-gyHAgQjiDf1m34Xpwzaqb76KgfzYrhK7iih+2IzcOCoZWr/8ZqmdBw+t0RU85ZmfJMgtgAiNtBQ/KS2325INXw==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      playwright-core: 1.40.0
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: false
 
   /postcss-import@15.1.0(postcss@8.4.31):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}

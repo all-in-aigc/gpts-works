@@ -15,6 +15,7 @@
     "langchain": "^0.0.186",
     "moment": "^2.29.4",
     "next": "14.0.0",
+    "playwright": "^1.40.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.11.0",
