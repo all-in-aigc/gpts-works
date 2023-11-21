@@ -1,6 +1,6 @@
-module github.com/all-in-aigc/gpts-works/api
+module github.com/all-in-aigc/gpts-works/spider
 
-go 1.18.1
+go 1.18
 
 require (
 	github.com/go-rod/rod v0.114.5
