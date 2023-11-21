@@ -1,6 +1,6 @@
 module github.com/all-in-aigc/gpts-works/api
 
-go 1.21.1
+go 1.18.1
 
 require (
 	github.com/go-rod/rod v0.114.5

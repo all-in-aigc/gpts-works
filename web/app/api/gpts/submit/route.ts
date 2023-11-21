@@ -1,5 +1,5 @@
 import { findByUuid, insertRow } from "@/app/models/gpts";
-import { respData, respErr, respOk } from "@/app/utils/resp";
+import { respData, respErr } from "@/app/utils/resp";
 
 import { fetchGpts } from "@/app/services/gpts";
 
