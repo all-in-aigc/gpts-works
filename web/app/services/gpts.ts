@@ -55,7 +55,7 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
 export const fetchGpts = async (
   visit_url: string
 ): Promise<Gpts | undefined> => {
-  const uri = `${process.env.WEB_API_BASE_URI}/api/gpts/fetch`;
+  const uri = `${process.env.SPIDER_API_BASE_URI}/gpts/fetch`;
   const data = {
     visit_url: visit_url,
   };
@@ -67,13 +67,19 @@ export const fetchGpts = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.WEB_API_KEY}`,
+        Authorization: `Bearer ${process.env.SPIDER_API_KEY}`,
       },
       body: JSON.stringify(data),
     });
     const res = await resp.json();
     if (res.data) {
-      return res.data;
+      const data = {
+        created_at: res.data["gizmo"]["updated_at"],
+        updated_at: res.data["gizmo"]["updated_at"],
+        data: res.data,
+      };
+
+      return formatGptsFromJson(data);
     }
   } catch (e) {
     console.log("request fetch gpts failed: ", e);

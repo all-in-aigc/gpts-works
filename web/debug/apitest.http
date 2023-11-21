@@ -36,5 +36,5 @@ POST {{baseUri}}/gpts/submit
 Content-Type: application/json
 
 {
-    "visit_url": "https://chat.openai.com/g/g-EBKM6RsBl"
+    "visit_url": "https://chat.openai.com/g/g-u46ouI43s-master-pixel-architect"
 }

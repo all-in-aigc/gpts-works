@@ -1,9 +1,7 @@
-import { Gpts } from "@/app/types/gpts";
 import { chromium } from "playwright";
-import { formatGptsFromJson } from "./gpts";
 import { sleep } from "@/app/utils/time";
 
-export async function crawlGpts(url: string): Promise<Gpts | undefined> {
+export async function spiderGpts(url: string): Promise<any | undefined> {
   const match = url.match(/g-\w+/);
   if (!match) {
     console.log("invalid gpts url: ", url);
@@ -12,7 +10,7 @@ export async function crawlGpts(url: string): Promise<Gpts | undefined> {
 
   let attempts = 2;
   while (attempts > 0) {
-    console.log("crawl gpts with url:", url);
+    console.log("spider gpts with url:", url);
     const browser = await chromium.launch({ headless: false, slowMo: 50 });
     try {
       const page = await browser.newPage();
@@ -31,27 +29,20 @@ export async function crawlGpts(url: string): Promise<Gpts | undefined> {
 
       if (propsString) {
         const props = JSON.parse(propsString);
-        const json = {
-          created_at:
-            props["props"]["pageProps"]["gizmo"]["gizmo"]["updated_at"],
-          updated_at:
-            props["props"]["pageProps"]["gizmo"]["gizmo"]["updated_at"],
-          data: props["props"]["pageProps"]["gizmo"],
-        };
-        console.log("Successfully Processed URL :", url);
+        const data = props["props"]["pageProps"]["gizmo"];
+        console.log("spider gpts successed:", url);
 
-        const gpt = formatGptsFromJson(json);
-        return gpt;
+        return data;
       }
 
       await browser.close();
     } catch (e) {
-      console.error("crawl gpts failed:", url, e);
+      console.error("spider gpts failed:", url, e);
       attempts--;
       if (attempts > 0) {
-        console.log(`crawl gpts retry, left times: ${attempts}`);
+        console.log(`spider gpts retry, left times: ${attempts}`);
       } else {
-        console.log("crawl gpts finally failed: ", url);
+        console.log("spider gpts finally failed: ", url);
       }
       await browser.close();
       await sleep(1000);

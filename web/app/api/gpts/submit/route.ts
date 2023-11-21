@@ -1,6 +1,6 @@
-import { respData, respErr } from "@/app/utils/resp";
+import { findByUuid, insertRow } from "@/app/models/gpts";
+import { respData, respErr, respOk } from "@/app/utils/resp";
 
-import { crawlGpts } from "@/app/services/crawl";
 import { fetchGpts } from "@/app/services/gpts";
 
 export async function POST(req: Request) {
@@ -10,6 +10,18 @@ export async function POST(req: Request) {
       const { visit_url } = params;
 
       const gpts = await fetchGpts(visit_url);
+      if (!gpts || !gpts.uuid) {
+        return respErr("fetch gpts failed");
+      }
+
+      const existGpts = await findByUuid(gpts.uuid);
+      if (existGpts) {
+        console.log("gpts exist: ", gpts.name, gpts.uuid);
+        return respData(existGpts);
+      }
+
+      console.log("insert new gpts: ", gpts.name, gpts.uuid);
+      await insertRow(gpts);
 
       return respData(gpts);
     }
