@@ -5,6 +5,7 @@ import {
   Dispatch,
   KeyboardEvent,
   SetStateAction,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -29,20 +30,17 @@ export default ({ setGpts, setLoading }: Props) => {
     if (e.code === "Enter" && !e.shiftKey) {
       if (e.keyCode !== 229) {
         e.preventDefault();
-        handleSubmit();
+        handleSubmit("", content);
       }
     }
   };
 
-  const handleSubmit = async () => {
-    if (!content) {
-      return;
-    }
-
+  const handleSubmit = async (keyword: string, question: string) => {
     try {
       const uri = "/api/gpts/search";
       const params = {
-        question: content,
+        keyword: keyword,
+        question: question,
       };
 
       setLoading(true);
@@ -62,6 +60,12 @@ export default ({ setGpts, setLoading }: Props) => {
       console.log("search failed: ", e);
     }
   };
+
+  useEffect(() => {
+    if (content) {
+      // handleSubmit(content, "");
+    }
+  }, [content]);
 
   return (
     <section className="relatve mt-4 md:mt-8">
@@ -88,7 +92,11 @@ export default ({ setGpts, setLoading }: Props) => {
             strokeLinecap="round"
             strokeLinejoin="round"
             className="absolute right-4 cursor-pointer"
-            onClick={handleSubmit}
+            onClick={() => {
+              if (content) {
+                handleSubmit("", content);
+              }
+            }}
           >
             <polyline points="9 10 4 15 9 20"></polyline>
             <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>

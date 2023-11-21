@@ -67,6 +67,14 @@ export async function getRows(last_id: number, limit: number): Promise<Gpts[]> {
   return gpts;
 }
 
+export async function getRowsByName(name: string): Promise<Gpts[]> {
+  const keyword = `%${name}%`;
+  const res =
+    await sql`SELECT * FROM gpts WHERE name ILIKE ${keyword} ORDER BY sort DESC LIMIT 50`;
+
+  return getGptsFromSqlResult(res);
+}
+
 export async function getRandRows(
   last_id: number,
   limit: number
