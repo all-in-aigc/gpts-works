@@ -11,7 +11,7 @@ export default ({ tabValue, setTabValue }: Props) => {
   const tabs: Tab[] = [
     {
       name: "hot",
-      title: "Hot 🔥",
+      title: "Featured 🔥",
     },
     {
       name: "recommended",

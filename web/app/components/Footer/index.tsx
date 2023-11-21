@@ -28,18 +28,50 @@ export default () => {
         </div>
         <div className="mb-14 mt-16 w-full [border-bottom:1.7px_solid_rgb(0,_0,_0)]"></div>
         <div className="flex flex-row justify-between max-[991px]:items-center max-[767px]:flex-col max-[767px]:items-start max-[479px]:flex-col-reverse">
-          <div className="max-[991px]: text-center font-semibold max-[991px]:py-1 max-[479px]:mb-4 sm:text-center">
-            Credit to
-            <a
-              href="https://www.gptshunter.com/"
-              className="inline-block mx-2 py-1.5 pr-6 font-normal text-[#276EF1] transition hover:text-[#276EF1] sm:py-2 sm:pr-6 lg:pr-12"
-              target="_blank"
-            >
-              GPTsHunter
-            </a>
+          <div className="max-[991px]: text-left font-semibold max-[991px]:py-1 max-[479px]:mb-4">
+            <p>Credit to</p>
+            <p>
+              <a
+                href="https://www.gptshunter.com/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                GPTsHunter
+              </a>
+            </p>
+          </div>
+          <div className="max-[991px]: text-left font-semibold max-[991px]:py-1 max-[479px]:mb-4">
+            <p>Friends</p>
+            <p>
+              <a
+                href="https://monica.im/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                Monica
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://faucet.openkey.cloud/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                ChatGPT-API-Faucet
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://gptalk.net/chat/new"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                GPTalk
+              </a>
+            </p>
           </div>
           <div className="max-[991px]:flex-none">
-            <p className="text-[#636262] max-[479px]:text-sm">
+            <p className="text-[#636262] max-[479px]:text-sm pb-8">
               {" "}
               © Copyright 2023. All rights reserved.{" "}
             </p>
