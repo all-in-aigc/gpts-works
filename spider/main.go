@@ -100,7 +100,8 @@ func requestFetchGpts(visitUrl string) (*gjson.Result, error) {
 
 	err := rod.Try(func() {
 		page := browser.MustPage(visitUrl).Timeout(60 * time.Second)
-		page.MustWaitStable()
+		// page.MustWaitStable()
+		log.Printf("page content: %s\n", page.MustElement("body").MustText())
 
 		data := page.MustElement("#__NEXT_DATA__").MustText()
 		if data != "" {
