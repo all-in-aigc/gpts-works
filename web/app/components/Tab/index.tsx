@@ -14,10 +14,6 @@ export default ({ tabValue, setTabValue }: Props) => {
       title: "Featured 🔥",
     },
     {
-      name: "recommended",
-      title: "Recommended",
-    },
-    {
       name: "latest",
       title: "Latest",
     },

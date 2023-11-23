@@ -16,7 +16,14 @@ export async function POST(req: Request) {
 
   const dbData = await getRowsByName(question);
   const vectorData = await searchGpts(question);
-  const data = dbData.concat(vectorData);
+  console.log("dbData", dbData);
+  console.log("vectorData", vectorData);
+
+  const data = mergeArraysUnique(dbData, vectorData);
 
   return respData(data);
+}
+
+function mergeArraysUnique<T>(arr1: T[], arr2: T[]): T[] {
+  return Array.from(new Set([...arr1, ...arr2]));
 }

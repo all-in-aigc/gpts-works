@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       }
 
       if (tab === "hot") {
-        const rows = await getHotRows(last_id, limit);
+        const rows = await getRecommendedRows(last_id, limit);
         return respData({
           rows: rows,
           count: count,
