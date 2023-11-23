@@ -22,8 +22,8 @@ export default () => {
         </h1>
 
         <div className="flex-1">
-          <ul className="hidden md:flex float-right text-lg text-slate-700 mr-4 items-center">
-            <li className="mx-4">
+          <ul className="md:flex float-right flex text-lg text-slate-700 mr-4 items-center">
+            <li className="mx-4 hidden md:block">
               <a
                 href="/extension"
                 target="_self"
@@ -36,7 +36,7 @@ export default () => {
                 Extension
               </a>
             </li>
-            <li className="mx-4">
+            <li className="mx-4 hidden md:block">
               <a
                 href="https://chat.openai.com/g/g-EBKM6RsBl-gpts-works"
                 target="_blank"

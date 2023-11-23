@@ -1,4 +1,5 @@
-import { BsDownload } from "react-icons/bs";
+import { BsBrowserChrome, BsDownload } from "react-icons/bs";
+
 import Image from "next/image";
 import extensionSrc from "@/public/extension.png";
 
@@ -10,11 +11,21 @@ export default () => {
           Third-party GPTs shows on browser sidebar
           <p className="mt-8">
             <a
-              href="https://gpts-works.s3.us-west-1.amazonaws.com/extension/gpts-works_1.0.3.zip"
-              className="inline-block px-4 md:px-8 py-2 md:py-4 bg-slate-50 border border-primary rounded-xl text-lg"
+              href="https://chromewebstore.google.com/detail/gpts-works/jhodoncnaefppnpeaaoholdenlcmcjgh"
+              className="inline-block mb-4 md:mb-0 px-4 mr-8 md:px-8 py-2 md:py-4 bg-slate-50 border-2 border-primary rounded-xl text-lg"
+              target="_blank"
             >
               <span className="flex items-center ">
-                <BsDownload className="mr-2 font-bold" />
+                <BsBrowserChrome className="text-primary mr-2 font-bold" />
+                Add To Chrome
+              </span>
+            </a>
+            <a
+              href="https://gpts-works.s3.us-west-1.amazonaws.com/extension/gpts-works_1.0.3.zip"
+              className="inline-block px-4 md:px-8 py-2 md:py-4 bg-slate-50 border-2 border-gray-500 rounded-xl text-lg"
+            >
+              <span className="flex items-center ">
+                <BsDownload className="text-primary mr-2 font-bold" />
                 Download extension
               </span>
             </a>
