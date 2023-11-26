@@ -3,6 +3,9 @@
 ### update gpts
 POST {{baseUri}}/process/update-gpts
 
+### submit gpts
+POST {{baseUri}}/process/submit-gpts
+
 ### get all gpts
 POST {{baseUri}}/gpts/all
 Content-Type: application/json
@@ -36,5 +39,5 @@ POST {{baseUri}}/gpts/submit
 Content-Type: application/json
 
 {
-    "visit_url": "https://chat.openai.com/g/g-u46ouI43s-master-pixel-architect"
+    "visit_url": "https://chat.openai.com/g/g-YPluiJ7Tt-mo-gui-ci-dian-devil-s-dictionary"
 }

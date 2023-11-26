@@ -59,15 +59,16 @@ func fetchGpts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := requestFetchGpts(visitUrl)
-	log.Printf("fetch gpts with error: %s, %v\n", visitUrl, err)
 	if err != nil {
-		log.Printf("fetch gpts failed: %v\n", err)
+		log.Printf("fetch gpts failed with error: %v\n", err)
 		respJson(w, -1, "fetch gpts failed", nil)
 		return
 	}
 
 	data := res.Get("props.pageProps.gizmo").String()
+	log.Printf("data:%v\n", data)
 	if data == "" {
+		log.Printf("fetch gpts failed with invalid data: %v\n", data)
 		respJson(w, -1, "fetch gpts failed with invalid data", nil)
 		return
 	}
