@@ -1,6 +1,6 @@
 "use client";
 
-import { BsGithub, BsTwitter } from "react-icons/bs";
+import { BsGithub, BsTwitter, BsShop, BsShopWindow } from "react-icons/bs";
 
 import { usePathname } from "next/navigation";
 
@@ -17,12 +17,26 @@ export default () => {
               backgroundImage: "url('/brand.svg')",
             }}
           >
-            GPTs Works
+            GPTs-Club Shop
           </a>
         </h1>
 
         <div className="flex-1">
           <ul className="hidden md:flex float-right text-lg text-slate-700 mr-4 items-center">
+          <li className="mx-4">
+              <a
+                href="https://gpts-club.com/"
+                target="_self"
+                className={
+                  pathname === "/extension"
+                    ? "text-[#2752f4]"
+                    : "hover:text-[#2752f4]"
+                }
+              >
+                Forum
+              </a>
+            </li>
+
             <li className="mx-4">
               <a
                 href="/extension"
@@ -38,22 +52,14 @@ export default () => {
             </li>
             <li className="mx-4">
               <a
-                href="https://chat.openai.com/g/g-EBKM6RsBl-gpts-works"
+                href="https://shop.blueshirt.cn/"
                 target="_blank"
                 className="hover:text-[#2752f4]"
               >
-                GPTs
+                <BsShopWindow className="text-xl" />
               </a>
             </li>
-            <li className="mx-4">
-              <a
-                href="https://github.com/all-in-aigc/gpts-works"
-                target="_blank"
-                className="hover:text-[#2752f4]"
-              >
-                <BsGithub className="text-xl" />
-              </a>
-            </li>
+            
             <li className="mx-4">
               <a
                 href="https://x.com/idoubicc"
@@ -65,7 +71,7 @@ export default () => {
             </li>
           </ul>
         </div>
-        <a href="https://www.buymeacoffee.com/idoubi" target="_blank">
+        <a href="https://www.buymeacoffee.com/l4walk" target="_blank">
           <svg
             width="27"
             height="39"
