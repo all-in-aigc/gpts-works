@@ -1,0 +1,23 @@
+/* comfirm.css */
+.popup {
+  position: fixed; /* 固定位置 */
+  top: 50%; /* 垂直居中 */
+  left: 50%; /* 水平居中 */
+  transform: translate(-50%, -50%); /* 用于精确居中 */
+  width: 80%; /* 弹窗宽度 */
+  max-width: 500px; /* 最大宽度 */
+  background-color: white; /* 背景色 */
+  padding: 20px; /* 内边距 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  z-index: 1000; /* 确保在顶层 */
+}
+
+.overlay {
+  position: fixed; /* 固定位置 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明遮罩层 */
+  z-index: 999; /* 确保在弹窗下面 */
+}

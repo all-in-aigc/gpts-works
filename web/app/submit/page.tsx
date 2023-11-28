@@ -13,32 +13,6 @@ export default () => {
   const [gptsCount, setGptsCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const fetchGpts = async (tab: string) => {
-    const params = {
-      last_id: 0,
-      limit: 50,
-      tab: tab,
-    };
-
-    setLoading(true);
-    const resp = await fetch("/api/gpts/all", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(params),
-    });
-    setLoading(false);
-
-    if (resp.ok) {
-      const res = await resp.json();
-      if (res.data) {
-        setGptsCount(res.data.count);
-        setGpts(res.data.rows);
-      }
-    }
-  };
-
   return (
     <section className="relatve">
       <div className="mx-auto w-full max-w-7xl px-5 py-2">
