@@ -13,6 +13,7 @@
     "@zilliz/milvus2-sdk-node": "^2.3.3",
     "apify-client": "^2.8.4",
     "daisyui": "^4.4.2",
+    "fs": "^0.0.1-security",
     "langchain": "^0.0.186",
     "make": "^0.8.1",
     "moment": "^2.29.4",

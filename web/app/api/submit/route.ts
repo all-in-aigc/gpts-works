@@ -2,6 +2,7 @@
 import { ApifyClient } from "apify-client";
 import { Gpts } from "@/app/types/gpts";
 import { log } from "console";
+import GptsList from "@/app/components/GptsList";
 
 const apifyToken: string = "apify_api_gRAX7rAHiRU7MtXNF0hupPnpc5t2zL3SkPgv";
 const client = new ApifyClient({ token: apifyToken });
@@ -39,11 +40,13 @@ function extractGizmoIds(urls: string[]): string[] {
 // 发送url
 export async function fetchItemsWithGizmoIds(
   inputUrls: string[]
-): Promise<void> {
+): Promise<Gpts[]> {
   try {
     const gizmoIds = extractGizmoIds(inputUrls);
     const items = await runActorWithGizmoIds(gizmoIds);
     console.log("输出items");
+
+    const gptsList: Gpts[] = []; // 初始化 Gpts 数组
 
     items.forEach((item) => {
       console.log("输出item");
@@ -51,10 +54,13 @@ export async function fetchItemsWithGizmoIds(
 
       //构造GPTs
       var gpts = constructGptsFromres(item);
+      gptsList.push(gpts);
       console.log(gpts);
     });
+    return gptsList;
   } catch (error) {
     console.error("Error running actor: ", error);
+    return [];
   }
 }
 
