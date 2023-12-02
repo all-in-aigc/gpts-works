@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       const existGpt = await findByUuid(uuid);
       if (existGpt) {
         console.log("gpt exist: ", existGpt.name, visit_url);
-        return respErr(`gpt: ${existGpt.name} exist: ${visit_url}`);
+        return respData(existGpt);
       }
 
       console.log("submit new gpt:", visit_url);

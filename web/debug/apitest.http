@@ -39,5 +39,5 @@ POST {{baseUri}}/gpts/submit
 Content-Type: application/json
 
 {
-    "visit_url": "https://chat.openai.com/g/g-YPluiJ7Tt-mo-gui-ci-dian-devil-s-dictionary"
+    "visit_url": "https://chat.openai.com/g/g-YxMKD5NQM-volunlink"
 }

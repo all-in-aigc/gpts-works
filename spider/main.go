@@ -9,6 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/go-rod/rod"
@@ -100,14 +101,31 @@ func requestFetchGpts(visitUrl string) (*gjson.Result, error) {
 	var res gjson.Result
 
 	err := rod.Try(func() {
+		start := time.Now()
+		log.Printf("start spider page at: %v\n", start)
+
 		page := browser.MustPage(visitUrl).Timeout(60 * time.Second)
 		// page.MustWaitStable()
-		log.Printf("page content: %s\n", page.MustElement("body").MustText())
 
-		data := page.MustElement("#__NEXT_DATA__").MustText()
-		if data != "" {
-			res = gjson.ParseBytes([]byte(data))
+		for {
+			body := page.MustElement("body").MustText()
+			if strings.HasPrefix(body, "Checking your browser before accessing") ||
+				strings.HasPrefix(body, "Checking if the site connection is secure") {
+				log.Printf("browser checking...%s\n", body)
+				continue
+			}
+
+			log.Printf("page body: %s\n", body)
+
+			data := page.MustElement("#__NEXT_DATA__").MustText()
+			log.Printf("gpts data: %s\n", data)
+			if data != "" {
+				res = gjson.ParseBytes([]byte(data))
+			}
+			break
 		}
+
+		log.Printf("end spider page at: %v\n", time.Now())
 	})
 
 	if errors.Is(err, context.DeadlineExceeded) {

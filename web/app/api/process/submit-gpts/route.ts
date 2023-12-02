@@ -3,6 +3,7 @@ import { getUuids, insertRow } from "@/app/models/gpts";
 
 import { extractGptsUuid } from "@/app/utils/gpts";
 import { respErr } from "@/app/utils/resp";
+import { sleep } from "@/app/utils/time";
 
 export async function POST() {
   try {
@@ -49,6 +50,8 @@ export async function POST() {
         failedCount += 1;
         console.log("submit gpts failed: ", uuid, url, i, e);
       }
+
+      sleep(3000);
     }
 
     return Response.json({
