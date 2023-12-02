@@ -26,6 +26,23 @@ export const getGptsFromFile = async (): Promise<Gpts[]> => {
   }
 };
 
+export const getGptsUrlsFromFile = () => {
+  try {
+    const dataFile = process.env.GPTS_URLS_FILE;
+    if (!dataFile) {
+      return [];
+    }
+
+    const data = fs.readFileSync(dataFile, "utf8");
+    const urls = data.split(/\r?\n/);
+
+    return urls;
+  } catch (err) {
+    console.log("get gpts urls from file failed: ", err);
+    return [];
+  }
+};
+
 export const searchGpts = async (question: string): Promise<Gpts[]> => {
   const uri = `${process.env.INDEX_API_BASE_URI}/gpts/search`;
   const data = {

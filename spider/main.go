@@ -9,6 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/go-rod/rod"
@@ -59,15 +60,16 @@ func fetchGpts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := requestFetchGpts(visitUrl)
-	log.Printf("fetch gpts with error: %s, %v\n", visitUrl, err)
 	if err != nil {
-		log.Printf("fetch gpts failed: %v\n", err)
+		log.Printf("fetch gpts failed with error: %v\n", err)
 		respJson(w, -1, "fetch gpts failed", nil)
 		return
 	}
 
 	data := res.Get("props.pageProps.gizmo").String()
+	log.Printf("data:%v\n", data)
 	if data == "" {
+		log.Printf("fetch gpts failed with invalid data: %v\n", data)
 		respJson(w, -1, "fetch gpts failed with invalid data", nil)
 		return
 	}
@@ -99,14 +101,31 @@ func requestFetchGpts(visitUrl string) (*gjson.Result, error) {
 	var res gjson.Result
 
 	err := rod.Try(func() {
+		start := time.Now()
+		log.Printf("start spider page at: %v\n", start)
+
 		page := browser.MustPage(visitUrl).Timeout(60 * time.Second)
 		// page.MustWaitStable()
-		log.Printf("page content: %s\n", page.MustElement("body").MustText())
 
-		data := page.MustElement("#__NEXT_DATA__").MustText()
-		if data != "" {
-			res = gjson.ParseBytes([]byte(data))
+		for {
+			body := page.MustElement("body").MustText()
+			if strings.HasPrefix(body, "Checking your browser before accessing") ||
+				strings.HasPrefix(body, "Checking if the site connection is secure") {
+				log.Printf("browser checking...%s\n", body)
+				continue
+			}
+
+			log.Printf("page body: %s\n", body)
+
+			data := page.MustElement("#__NEXT_DATA__").MustText()
+			log.Printf("gpts data: %s\n", data)
+			if data != "" {
+				res = gjson.ParseBytes([]byte(data))
+			}
+			break
 		}
+
+		log.Printf("end spider page at: %v\n", time.Now())
 	})
 
 	if errors.Is(err, context.DeadlineExceeded) {
