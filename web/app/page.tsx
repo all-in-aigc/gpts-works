@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Brand from "./components/Brand";
 import { Gpts } from "./types/gpts";
 import GptsList from "./components/GptsList";
-import ProductHunt from "./components/ProductHunt";
+// import ProductHunt from "./components/ProductHunt";
 import Search from "./components/Search";
 import Tab from "./components/Tab";
 
@@ -48,7 +48,7 @@ export default () => {
   return (
     <>
       <Brand count={gptsCount} />
-      <ProductHunt />
+      {/* <ProductHunt /> */}
       <Search setGpts={setGpts} setLoading={setLoading} />
       <Tab tabValue={tabValue} setTabValue={setTabValue} />
       <GptsList gpts={gpts} loading={loading} />

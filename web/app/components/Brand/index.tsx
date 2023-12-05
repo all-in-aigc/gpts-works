@@ -15,13 +15,13 @@ export default ({ count }: Props) => {
           <p className="mt-4 mb-4 md:mt-12 md:mb-8 text:lg md:text-4xl">
             <span className="text-primary font-bold">{count}</span> fantastic
             GPTs stored
-            <a
+            {/* <a
               href="https://github.com/all-in-aigc/gpts-works/issues/5"
               target="_blank"
               className="text-sm text-primary mx-2"
             >
               Submit yours 👉
-            </a>
+            </a> */}
           </p>
         </div>
       </div>

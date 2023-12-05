@@ -1,6 +1,6 @@
 "use client";
 
-import { BsGithub, BsTwitter } from "react-icons/bs";
+// import { BsGithub, BsTwitter } from "react-icons/bs";
 
 import { usePathname } from "next/navigation";
 
@@ -17,13 +17,13 @@ export default () => {
               backgroundImage: "url('/brand.svg')",
             }}
           >
-            GPTs Works
+            GPTs / Way to AGI
           </a>
         </h1>
 
         <div className="flex-1">
           <ul className="hidden md:flex float-right text-lg text-slate-700 mr-4 items-center">
-            <li className="mx-4">
+            {/* <li className="mx-4">
               <a
                 href="/extension"
                 target="_self"
@@ -35,8 +35,8 @@ export default () => {
               >
                 Extension
               </a>
-            </li>
-            <li className="mx-4">
+            </li> */}
+            {/* <li className="mx-4">
               <a
                 href="https://chat.openai.com/g/g-EBKM6RsBl-gpts-works"
                 target="_blank"
@@ -44,8 +44,8 @@ export default () => {
               >
                 GPTs
               </a>
-            </li>
-            <li className="mx-4">
+            </li> */}
+            {/* <li className="mx-4">
               <a
                 href="https://github.com/all-in-aigc/gpts-works"
                 target="_blank"
@@ -53,8 +53,8 @@ export default () => {
               >
                 <BsGithub className="text-xl" />
               </a>
-            </li>
-            <li className="mx-4">
+            </li> */}
+            {/* <li className="mx-4">
               <a
                 href="https://x.com/idoubicc"
                 target="_blank"
@@ -62,10 +62,10 @@ export default () => {
               >
                 <BsTwitter className="text-xl" />
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
-        <a href="https://www.buymeacoffee.com/idoubi" target="_blank">
+        {/* <a href="https://www.buymeacoffee.com/idoubi" target="_blank">
           <svg
             width="27"
             height="39"
@@ -83,7 +83,7 @@ export default () => {
               fill="#0D0C22"
             ></path>
           </svg>
-        </a>
+        </a> */}
       </div>
     </header>
   );
