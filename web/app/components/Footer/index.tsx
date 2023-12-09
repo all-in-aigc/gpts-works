@@ -6,9 +6,9 @@ export default () => {
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24">
         <div className="flex flex-row justify-between max-[767px]:flex-col max-[767px]:items-start">
           <div className="max-[767px]: w-full max-w-[560px] max-[991px]:mr-4 max-[991px]:flex-initial">
-            <h2 className="text-3xl font-bold md:text-5xl">
+            <p className="text-3xl font-bold md:text-5xl">
               Find fantastic GPTs all over the world.
-            </h2>
+            </p>
           </div>
           <div className="max-[767px]: max-[991px]:ml-4 max-[991px]:flex-none max-[767px]:mt-8">
             <div className="mb-4 flex max-w-[272px] items-start justify-start">

@@ -9,7 +9,10 @@ import type { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "GPTs Works - Third-party GPTs store",
+  title: {
+    template: "%s in Third-party GPT store | GPTs Works ",
+    default: "GPTs Works",
+  },
   description:
     "GPTs Works is a Third-party GPTs store. Support seach GPTs by chatting.",
   keywords:

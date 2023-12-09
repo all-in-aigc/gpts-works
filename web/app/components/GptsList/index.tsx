@@ -4,6 +4,7 @@ import { Gpts } from "@/app/types/gpts";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Link from "next/link";
 import moment from "moment";
+import { renameShortUrl } from "@/app/utils/gpts";
 
 interface Props {
   gpts: Gpts[];
@@ -18,7 +19,11 @@ export default ({ gpts, loading }: Props) => {
           <div className="mb-8 gap-5 py-4 [column-count:1] md:mb-12 md:[column-count:2] lg:mb-16 lg:[column-count:3]">
             {gpts.map((item: Gpts, idx: number) => {
               return (
-                <Link href={`/g/${item.uuid}`} target="_self" key={idx}>
+                <Link
+                  href={`/${renameShortUrl(item.short_url, item.uuid)}`}
+                  target="_self"
+                  key={idx}
+                >
                   <div className="mb-6 gap-6 overflow-hidden rounded-2xl border border-solid border-[#7e7e7e] bg-white p-8">
                     <div className="mb-4 flex flex-row">
                       <LazyLoadImage

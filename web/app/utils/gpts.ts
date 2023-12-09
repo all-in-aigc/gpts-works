@@ -4,3 +4,14 @@ export function extractGptsUuid(url: string): string | null {
   );
   return match ? match[1] : null;
 }
+
+export function renameShortUrl(shortUrl: string, uuid: string): string {
+  let newUrl = shortUrl.replace(uuid, "");
+  if (newUrl.startsWith("-")) {
+    newUrl = newUrl.replace("-", "");
+  }
+
+  newUrl = newUrl + "-" + uuid;
+
+  return newUrl;
+}

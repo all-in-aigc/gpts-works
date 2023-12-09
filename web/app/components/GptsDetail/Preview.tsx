@@ -21,15 +21,17 @@ export default ({ gpts }: Props) => {
         <img
           className="mx-auto w-16 h-16 rounded-full"
           src={gpts.avatar_url}
-          alt=""
+          alt={gpts.name}
         />
-        <h2 className="mt-2 text-center text-2xl font-medium">{gpts.name}</h2>
-        <p className="mx-10 mt-2 text-center text-xl font-normal text-token-text-secondary">
+        <h2 className="mt-2 text-center text-2xl font-medium">
+          Preview {gpts.name}
+        </h2>
+        {/* <p className="mx-10 mt-2 text-center text-xl font-normal text-token-text-secondary">
           {gpts.description}
-        </p>
-        <p className="mt-2 text-sm text-token-text-tertiary">
+        </p> */}
+        {/* <p className="mt-2 text-sm text-token-text-tertiary">
           By {gpts.author_name}
-        </p>
+        </p> */}
       </div>
 
       <div className="px-8 py-8">
@@ -46,10 +48,12 @@ export default ({ gpts }: Props) => {
       <div className="absolute bottom-20 w-full px-8">
         {promptStarters && (
           <div className="flex items-center flex-wrap">
+            <h2 className="text-md my-2">Prompt Starters of {gpts.name}</h2>
+
             {promptStarters.map((v: string, idx: number) => {
               return (
-                <div key={idx} className="w-full md:w-1/2 px-1 py-1">
-                  <p className="rounded-xl text-left text-gray-700 border  border-gray-50 px-2 py-1 bg-white text-sm truncate">
+                <div key={idx} className="w-full md:w-1/1 px-0 py-1">
+                  <p className="rounded-xl text-left text-gray-700 border border-gray-50 px-2 py-1 bg-white text-sm truncate">
                     {v}
                   </p>
                 </div>
@@ -60,7 +64,7 @@ export default ({ gpts }: Props) => {
         <input
           type="text"
           disabled
-          placeholder={`Message ${gpts.name}…`}
+          placeholder={`Message to ${gpts.name}`}
           className="w-full mt-4 text-sm bg-white border border-primary rounded-xl px-4 py-2"
         />
       </div>
