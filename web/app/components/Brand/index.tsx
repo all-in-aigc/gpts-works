@@ -14,7 +14,7 @@ export default ({ count }: Props) => {
           <h2 className="text-3xl font-bold md:text-7xl">
             Third-party GPTs store
           </h2>
-          <p className="mt-12 mb-4 md:mt-12 md:mb-4 text:lg md:text-4xl">
+          <div className="mt-12 mb-4 md:mt-12 md:mb-4 text:lg md:text-4xl">
             <span className="text-primary font-bold">{count}</span> fantastic
             GPTs stored
             {/* <a
@@ -25,7 +25,7 @@ export default ({ count }: Props) => {
               Submit yours 👉
             </a> */}
             <Form />
-          </p>
+          </div>
         </div>
       </div>
       <img

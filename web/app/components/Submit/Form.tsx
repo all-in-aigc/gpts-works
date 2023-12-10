@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -51,7 +53,6 @@ export default () => {
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <a
-        href="javascript:;"
         onClick={() => setShowForm(true)}
         className="text-sm text-primary pt-4 mx-2"
       >
@@ -61,7 +62,7 @@ export default () => {
       <dialog className="modal" open={showForm}>
         <div className="modal-box">
           <h3 className="font-bold text-lg">Submit Your Awesome GPTs</h3>
-          <p className="text-center text-md">
+          <div className="text-center text-md">
             <div>
               <p className="text-sm my-2">input GPTs visit url</p>
               <input
@@ -85,7 +86,7 @@ export default () => {
               </p>
               {errmsg && <p className="text-red-300 text-sm">{errmsg}</p>}
             </div>
-          </p>
+          </div>
           <button
             className="absolute top-4 right-4"
             onClick={() => setShowForm(false)}

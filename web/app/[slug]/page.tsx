@@ -12,13 +12,20 @@ async function getData(slug: string): Promise<Gpts | undefined> {
     return;
   }
 
+  let uuid = "";
+
   const arr = slug.split("-");
   if (!arr || arr.length < 3) {
-    return;
+    if (arr.length === 2 && arr[0] === "g") {
+      uuid = slug;
+    } else {
+      return;
+    }
+  } else {
+    const arrLen = arr.length;
+    uuid = arr[arrLen - 2] + "-" + arr[arrLen - 1];
   }
 
-  const arrLen = arr.length;
-  const uuid = arr[arrLen - 2] + "-" + arr[arrLen - 1];
   if (!uuid.startsWith("g-")) {
     return;
   }

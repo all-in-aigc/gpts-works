@@ -6,6 +6,10 @@ export function extractGptsUuid(url: string): string | null {
 }
 
 export function renameShortUrl(shortUrl: string, uuid: string): string {
+  if (!shortUrl) {
+    return uuid;
+  }
+
   let newUrl = shortUrl.replace(uuid, "");
   if (newUrl.startsWith("-")) {
     newUrl = newUrl.replace("-", "");
