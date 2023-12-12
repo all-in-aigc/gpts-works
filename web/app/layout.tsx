@@ -42,9 +42,9 @@ export default function RootLayout({
         </main>
 
         <script
-          defer
-          data-domain="gpts.works"
-          src="https://plausible.io/js/script.js"
+          async
+          src="https://tongji.thinkwx.com/script.js"
+          data-website-id="c2b6b677-76f4-4003-aa3e-6b54d345fefe"
         ></script>
       </body>
     </html>
