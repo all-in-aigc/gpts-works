@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-import Brand from "./components/Brand";
-import { Gpts } from "./types/gpts";
-import GptsList from "./components/GptsList";
-import ProductHunt from "./components/ProductHunt";
-import Search from "./components/Search";
-import Tab from "./components/Tab";
+import Brand from "../components/Brand";
+import { Gpts } from "../types/gpts";
+import GptsList from "../components/GptsList";
+import ProductHunt from "../components/ProductHunt";
+import Search from "../components/Search";
+import Tab from "../components/Tab";
 
 export default () => {
   const [gpts, setGpts] = useState<Gpts[]>([]);

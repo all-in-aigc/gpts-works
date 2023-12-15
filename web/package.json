@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.451.0",
+    "@clerk/nextjs": "^4.28.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@vercel/postgres": "^0.5.1",
     "@zilliz/milvus2-sdk-node": "^2.3.3",
     "aws-sdk": "^2.1499.0",

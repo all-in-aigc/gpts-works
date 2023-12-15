@@ -1,4 +1,9 @@
-import { QueryResult, QueryResultRow, sql } from "@vercel/postgres";
+import {
+  QueryResult,
+  QueryResultRow,
+  createClient,
+  sql,
+} from "@vercel/postgres";
 
 import { Gpts } from "@/app/types/gpts";
 import { isGptsSensitive } from "@/app/services/gpts";
@@ -95,6 +100,23 @@ export async function getRowsByName(name: string): Promise<Gpts[]> {
     await sql`SELECT * FROM gpts WHERE name ILIKE ${keyword} ORDER BY sort DESC LIMIT 50`;
 
   return getGptsFromSqlResult(res);
+}
+
+export async function getByUuids(uuids: string[]): Promise<Gpts[]> {
+  const client = createClient();
+  await client.connect();
+
+  try {
+    const placeholders = uuids.map((_, index) => `$${index + 1}`).join(", ");
+    const query = `SELECT * FROM gpts WHERE uuid IN (${placeholders})`;
+
+    const res = await client.query(query, uuids);
+
+    return getGptsFromSqlResult(res);
+  } catch (e) {
+    await client.end();
+    return [];
+  }
 }
 
 export async function getRandRows(

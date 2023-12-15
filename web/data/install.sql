@@ -17,3 +17,11 @@ CREATE TABLE gpts (
     sort INTEGER NOT NULL DEFAULT 0,
     rating SMALLINT
 );
+
+CREATE TABLE user_gpts (
+    id SERIAL PRIMARY KEY,
+    user_email VARCHAR(255) NOT NULL,
+    gpts_uuid VARCHAR(255) NOT NULL,
+    created_at timestamptz,
+    CONSTRAINT unique_user_gpts UNIQUE (user_email, gpts_uuid) 
+);

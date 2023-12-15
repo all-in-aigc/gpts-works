@@ -84,6 +84,10 @@ export default () => {
             ></path>
           </svg>
         </a>
+
+        <div className="ml-8">
+          <a href="/dashboard/my-gpts">Dashboard</a>
+        </div>
       </div>
     </header>
   );

@@ -14,3 +14,8 @@ export interface Gpts {
   avatar_cdn_url?: string;
   rating?: number;
 }
+
+export interface UserGpts {
+  user_email: string;
+  gpts_uuid: string;
+}

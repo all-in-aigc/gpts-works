@@ -1,4 +1,6 @@
-import { Gpts } from "@/app/types/gpts";
+import { Gpts, UserGpts } from "@/app/types/gpts";
+import { findUserGpts, insertUserGpts } from "../models/user_gpts";
+
 import fs from "fs";
 
 export const getGptsFromFile = async (): Promise<Gpts[]> => {
@@ -184,5 +186,16 @@ export function formatGptsFromJson(v: any): Gpts | undefined {
   } catch (e) {
     console.log("format gpts from json failed: ", e);
     return;
+  }
+}
+
+export async function saveUserGpts(userEmail: string, gptsUuid: string) {
+  try {
+    const userGpts = await findUserGpts(userEmail, gptsUuid);
+    if (!userGpts) {
+      await insertUserGpts(userEmail, gptsUuid);
+    }
+  } catch (e) {
+    console.log("save user gpts failed: ", e);
   }
 }
