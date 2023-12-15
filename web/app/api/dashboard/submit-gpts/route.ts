@@ -6,14 +6,14 @@ import { currentUser } from "@clerk/nextjs";
 import { extractGptsUuid } from "@/app/utils/gpts";
 
 export async function POST(req: Request) {
-  try {
-    const user = await currentUser();
-    if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
-      return respErr("not login");
-    }
-    const email = user.emailAddresses[0].emailAddress;
-    console.log("user email: ", email);
+  const user = await currentUser();
+  if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
+    return respErr("not login");
+  }
+  const email = user.emailAddresses[0].emailAddress;
+  console.log("user email: ", email);
 
+  try {
     if (req.body) {
       const params = await req.json();
       const { visit_url } = params;

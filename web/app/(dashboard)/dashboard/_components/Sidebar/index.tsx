@@ -8,7 +8,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { SignOutButton, SignedIn, UserButton } from "@clerk/nextjs";
 
 import { usePathname } from "next/navigation";
@@ -47,27 +47,6 @@ export default () => {
   ];
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const fetchUserInfo = async () => {
-    const uri = "/api/dashboard/user-info";
-
-    const resp = await fetch(uri, {
-      method: "GET",
-      headers: {},
-    });
-
-    if (resp.ok) {
-      const res = await resp.json();
-      if (res.data) {
-        console.log("user info ", res.data);
-        return;
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchUserInfo();
-  }, []);
 
   const Nav = (
     <nav className="flex flex-1 flex-col">

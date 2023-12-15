@@ -4,14 +4,15 @@ import { currentUser } from "@clerk/nextjs";
 import { getUserGpts } from "@/app/models/user_gpts";
 
 export async function GET(req: Request) {
+  const user = await currentUser();
+  if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
+    return respErr("not login");
+  }
+
+  const email = user.emailAddresses[0].emailAddress;
+  console.log("user email: ", email);
+
   try {
-    const user = await currentUser();
-    if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
-      return respErr("not login");
-    }
-
-    const email = user.emailAddresses[0].emailAddress;
-
     const gpts = await getUserGpts(email, 1, 50);
 
     return respData(gpts || []);

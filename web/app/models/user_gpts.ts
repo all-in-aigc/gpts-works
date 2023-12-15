@@ -59,8 +59,6 @@ export async function getUserGpts(
     uuids.push(row.gpts_uuid);
   });
 
-  console.log("uids", uuids);
-
   const gpts = await getByUuids(uuids);
 
   return gpts;
