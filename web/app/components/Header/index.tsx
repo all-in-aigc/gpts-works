@@ -65,7 +65,11 @@ export default () => {
             </li>
           </ul>
         </div>
-        <a href="https://www.buymeacoffee.com/idoubi" target="_blank">
+        <a
+          className="hidden md:block"
+          href="https://www.buymeacoffee.com/idoubi"
+          target="_blank"
+        >
           <svg
             width="27"
             height="39"
@@ -85,7 +89,7 @@ export default () => {
           </svg>
         </a>
 
-        <div className="ml-8">
+        <div className="ml:0 md:ml-8">
           <a href="/dashboard/my-gpts">Dashboard</a>
         </div>
       </div>
