@@ -97,7 +97,9 @@ export default ({ user }: Props) => {
                     className="w-12 h-12 rounded-full"
                     alt=""
                   />
-                  <div className="ml-2">{user.nickname}</div>
+                  <div className="ml-2">
+                    {user.nickname ? user.nickname : user.email}
+                  </div>
                 </div>
               )}
               <SignOutButton signOutCallback={() => router.push("/")}>
