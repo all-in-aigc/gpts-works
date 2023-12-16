@@ -7,10 +7,15 @@ import { renameShortUrl } from "@/app/utils/gpts";
 import { respData } from "@/app/utils/resp";
 import { writeFile } from "fs";
 
-export async function POST() {
+export async function POST(req: Request) {
   try {
-    let batch_no = 1;
-    let page_step = 5;
+    let { batch_no } = await req.json();
+    if (!batch_no) {
+      batch_no = 1;
+    }
+    console.log("batch_no", batch_no);
+
+    let page_step = 10;
     let limit = 1000;
 
     let start_page = (batch_no - 1) * page_step + 1;

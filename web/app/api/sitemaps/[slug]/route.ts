@@ -7,7 +7,7 @@ import { parse } from "url";
 import { renameShortUrl } from "@/app/utils/gpts";
 import { respErr } from "@/app/utils/resp";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: Request) {
   try {
     if (req.url) {
       const { pathname } = parse(req.url, true);
@@ -23,7 +23,7 @@ export async function GET(req: NextApiRequest) {
           return respErr("invalid path");
         }
 
-        let page_step = 5;
+        let page_step = 10;
         let limit = 1000;
 
         let start_page = (batch_no - 1) * page_step + 1;
