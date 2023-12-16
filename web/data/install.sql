@@ -25,3 +25,11 @@ CREATE TABLE user_gpts (
     created_at timestamptz,
     CONSTRAINT unique_user_gpts UNIQUE (user_email, gpts_uuid) 
 );
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    nickname VARCHAR(255),
+    avatar_url VARCHAR(255),
+    created_at timestamptz
+);
