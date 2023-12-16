@@ -74,9 +74,16 @@ export async function getNoAvatarCdnUrlUuids(): Promise<string[]> {
   return uuids;
 }
 
-export async function getRows(last_id: number, limit: number): Promise<Gpts[]> {
+export async function getRows(page: number, limit: number): Promise<Gpts[]> {
+  if (page < 1) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
   const res =
-    await sql`SELECT * FROM gpts WHERE id > ${last_id} LIMIT ${limit} `;
+    await sql`SELECT * FROM gpts ORDER BY id asc LIMIT ${limit} OFFSET ${offset}`;
   if (res.rowCount === 0) {
     return [];
   }

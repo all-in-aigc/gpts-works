@@ -44,6 +44,9 @@ export async function getUserGpts(
   if (page < 1) {
     page = 1;
   }
+  if (limit <= 0) {
+    limit = 50;
+  }
   const offset = (page - 1) * limit;
 
   const res =
