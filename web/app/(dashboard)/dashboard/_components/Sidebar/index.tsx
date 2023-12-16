@@ -11,6 +11,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { SignOutButton, SignedIn, UserButton } from "@clerk/nextjs";
 
+import { User } from "@/app/types/user";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
@@ -18,7 +19,11 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default () => {
+interface Props {
+  user: User | null;
+}
+
+export default ({ user }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -83,10 +88,20 @@ export default () => {
           </ul>
         </li>
         <li className="-mx-6 mt-auto">
-          <div className="my-4 mx-4 flex items-center">
+          <div className="my-4 mx-4">
             <SignedIn>
+              {user && (
+                <div className="flex items-center cursor-pointer">
+                  <img
+                    src={user.avatar_url}
+                    className="w-12 h-12 rounded-full"
+                    alt=""
+                  />
+                  <div className="ml-2">{user.nickname}</div>
+                </div>
+              )}
               <SignOutButton signOutCallback={() => router.push("/")}>
-                <button className="bg-red-500 text-white rounded-md px-8 mb-4 py-1 mx-auto">
+                <button className="bg-red-500 text-white rounded-md px-8 mt-4 w-full mb-4 py-1 mx-auto">
                   Sign out
                 </button>
               </SignOutButton>
