@@ -18,7 +18,8 @@ import (
 )
 
 var (
-	env string
+	env     string
+	browser *rod.Browser
 )
 
 func main() {
@@ -36,6 +37,13 @@ func main() {
 
 func init() {
 	flag.StringVar(&env, "env", "dev", "--env")
+
+	if err := InitBrowser(); err != nil {
+		log.Fatalf("init browser failed: %v", err)
+		return
+	}
+
+	log.Println("init browser ok")
 }
 
 func fetchGpts(w http.ResponseWriter, r *http.Request) {
@@ -106,6 +114,7 @@ func requestFetchGpts(visitUrl string) (*gjson.Result, error) {
 
 		page := browser.MustPage(visitUrl).Timeout(60 * time.Second)
 		// page.MustWaitStable()
+		defer page.MustClose()
 
 		for {
 			body := page.MustElement("body").MustText()
@@ -142,14 +151,22 @@ func requestFetchGpts(visitUrl string) (*gjson.Result, error) {
 }
 
 func getBrowser() *rod.Browser {
+	return browser
+}
+
+func InitBrowser() error {
 	if env == "prod" {
 		l := launcher.MustNewManaged("ws://127.0.0.1:7317")
-		browser := rod.New().Client(l.MustClient()).MustConnect()
+		browser = rod.New().Client(l.Headless(true).MustClient()).MustConnect()
 
-		return browser
+		return nil
 	}
 
-	browser := rod.New().MustConnect()
+	u := launcher.New().
+		Headless(true).
+		MustLaunch()
 
-	return browser
+	browser = rod.New().ControlURL(u).MustConnect()
+
+	return nil
 }
