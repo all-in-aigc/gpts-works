@@ -73,7 +73,7 @@ export default ({ setGpts, setLoading }: Props) => {
         <div className="flex items-center relative">
           <input
             type="text"
-            className="flex-1 px-4 py-3 border-2 border-primary bg-white rounded-lg"
+            className="flex-1 px-4 py-3 border-2 border-primary bg-white rounded-lg text-sm"
             placeholder="keyword or prompt for searching GPTs"
             ref={inputRef}
             value={content}

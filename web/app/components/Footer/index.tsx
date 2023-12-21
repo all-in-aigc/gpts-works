@@ -31,11 +31,11 @@ export default () => {
           <div className="max-[991px]: text-center font-semibold max-[991px]:py-1 max-[479px]:mb-4 sm:text-center">
             Credit to
             <a
-              href="https://www.gptshunter.com/"
+              href="https://gpts.works/"
               className="inline-block mx-2 py-1.5 pr-6 font-normal text-[#276EF1] transition hover:text-[#276EF1] sm:py-2 sm:pr-6 lg:pr-12"
               target="_blank"
             >
-              GPTsHunter
+              GPTs Works
             </a>
           </div>
           <div className="max-[991px]:flex-none">
