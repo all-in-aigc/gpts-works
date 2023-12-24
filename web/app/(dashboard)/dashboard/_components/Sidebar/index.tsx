@@ -4,6 +4,7 @@ import {
   ArrowUturnLeftIcon,
   Bars3Icon,
   CubeIcon,
+  CurrencyDollarIcon,
   PlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -44,6 +45,13 @@ export default ({ user }: Props) => {
     },
     {
       id: 3,
+      name: "Promote GPTs",
+      href: "/dashboard/promote-gpts",
+      icon: CurrencyDollarIcon,
+      current: pathname === "/dashboard/promote-gpts",
+    },
+    {
+      id: 4,
       name: "Go back to home",
       href: "/",
       icon: ArrowUturnLeftIcon,

@@ -80,7 +80,7 @@ export default () => {
                 onClick={submit}
                 disabled={loading}
               >
-                Submit
+                {loading ? "Processing..." : "Submit"}
               </button>
             </div>
 

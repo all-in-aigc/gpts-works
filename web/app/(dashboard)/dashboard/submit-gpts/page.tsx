@@ -1,4 +1,4 @@
-import Form from "../_components/Form";
+import Form from "../_components/Form/SubmitForm";
 
 export default () => {
   return (

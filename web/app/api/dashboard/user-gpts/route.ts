@@ -1,10 +1,14 @@
 import { respData, respErr } from "@/app/utils/resp";
 
+import { Gpts } from "@/app/types/gpts";
 import { User } from "@/app/types/user";
 import { currentUser } from "@clerk/nextjs";
 import { getUserGpts } from "@/app/models/user_gpts";
+import { getUserPromotedGpts } from "@/app/models/order";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
+  const { is_promoted } = await req.json();
+
   const user = await currentUser();
   if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {
     return respErr("not login");
@@ -21,7 +25,12 @@ export async function GET(req: Request) {
   // console.log("user profile: ", userInfo);
 
   try {
-    const gpts = await getUserGpts(email, 1, 50);
+    let gpts: Gpts[] | undefined = [];
+    if (is_promoted) {
+      gpts = await getUserPromotedGpts(email);
+    } else {
+      gpts = await getUserGpts(email, 1, 50);
+    }
 
     return respData(gpts || []);
   } catch (e) {

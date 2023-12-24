@@ -13,6 +13,7 @@ export interface Gpts {
   visit_url?: string;
   avatar_cdn_url?: string;
   rating?: number;
+  is_promoted?: boolean;
 }
 
 export interface UserGpts {

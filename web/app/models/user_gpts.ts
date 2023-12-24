@@ -1,6 +1,7 @@
 import { Gpts, UserGpts } from "@/app/types/gpts";
 import { formatGpts, getByUuids } from "./gpts";
 
+import { getUserPromotedUuids } from "./order";
 import { sql } from "@vercel/postgres";
 
 export async function insertUserGpts(userEmail: string, gptsUuid: string) {
@@ -63,6 +64,16 @@ export async function getUserGpts(
   });
 
   const gpts = await getByUuids(uuids);
+  if (gpts) {
+    const promoted_uuids = await getUserPromotedUuids(user_email);
+    if (promoted_uuids) {
+      for (let i = 0, l = gpts.length; i < l; i++) {
+        if (promoted_uuids.includes(gpts[i].uuid)) {
+          gpts[i].is_promoted = true;
+        }
+      }
+    }
+  }
 
   return gpts;
 }

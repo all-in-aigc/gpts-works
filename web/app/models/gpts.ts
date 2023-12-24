@@ -4,8 +4,10 @@ import {
   createClient,
   sql,
 } from "@vercel/postgres";
+import { mergeArraysUnique, mergeGptsList } from "../utils/gpts";
 
 import { Gpts } from "@/app/types/gpts";
+import { getPromotedGpts } from "./order";
 import { isGptsSensitive } from "@/app/services/gpts";
 
 export async function createTable() {
@@ -150,10 +152,18 @@ export async function getRecommendedRows(
   last_id: number,
   limit: number
 ): Promise<Gpts[]> {
+  let user_promoted_gpts = await getPromotedGpts();
+  if (!user_promoted_gpts) {
+    user_promoted_gpts = [];
+  }
+  console.log("user_promoted_gpts count: ", user_promoted_gpts.length);
+
   const res =
     await sql`SELECT * FROM gpts WHERE is_recommended=true AND id > ${last_id} ORDER BY sort DESC LIMIT ${limit}`;
 
-  return getGptsFromSqlResult(res);
+  const system_promoted_gpts = getGptsFromSqlResult(res);
+
+  return mergeGptsList(user_promoted_gpts, system_promoted_gpts);
 }
 
 export async function getHotRows(

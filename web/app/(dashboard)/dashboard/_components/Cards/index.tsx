@@ -7,9 +7,10 @@ import { Gpts } from "@/app/types/gpts";
 interface Props {
   gptsList: Gpts[] | null;
   loading: boolean;
+  is_promoted?: boolean;
 }
 
-export default ({ gptsList, loading }: Props) => {
+export default ({ gptsList, loading, is_promoted }: Props) => {
   return (
     <>
       {loading ? (
@@ -33,7 +34,7 @@ export default ({ gptsList, loading }: Props) => {
             </ul>
           ) : (
             <div className="mt-16">
-              <Empty />
+              <Empty is_promoted={is_promoted} />
             </div>
           )}
         </>

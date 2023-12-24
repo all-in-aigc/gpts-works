@@ -53,15 +53,6 @@ export default () => {
             </p>
             <p>
               <a
-                href="https://faucet.openkey.cloud/"
-                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
-                target="_blank"
-              >
-                ChatGPT-API-Faucet
-              </a>
-            </p>
-            <p>
-              <a
                 href="https://gptalk.net/chat/new"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
