@@ -48,7 +48,10 @@ export default ({ user }: Props) => {
       name: "Promote GPTs",
       href: "/dashboard/promote-gpts",
       icon: CurrencyDollarIcon,
-      current: pathname === "/dashboard/promote-gpts",
+      current:
+        pathname === "/dashboard/promote-gpts" ||
+        pathname.startsWith("/dashboard/promote-checkout") ||
+        pathname.startsWith("/dashboard/promote-success"),
     },
     {
       id: 4,
