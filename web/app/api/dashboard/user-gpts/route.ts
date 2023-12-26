@@ -6,6 +6,8 @@ import { currentUser } from "@clerk/nextjs";
 import { getUserGpts } from "@/app/models/user_gpts";
 import { getUserPromotedGpts } from "@/app/models/order";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   const { is_promoted } = await req.json();
 

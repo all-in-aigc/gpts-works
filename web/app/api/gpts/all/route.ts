@@ -7,6 +7,8 @@ import {
 } from "@/app/models/gpts";
 import { respData, respErr } from "@/app/utils/resp";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     if (req.body) {

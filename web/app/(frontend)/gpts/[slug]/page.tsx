@@ -17,6 +17,8 @@ import { findCategoryBySlug } from "@/app/models/categories";
 import { mergeGptsList } from "@/app/utils/gpts";
 import { searchGpts } from "@/app/services/gpts";
 
+export const maxDuration = 120;
+
 async function getData(slug: string): Promise<Gpts[] | undefined> {
   console.log("gpts slug:", slug);
 

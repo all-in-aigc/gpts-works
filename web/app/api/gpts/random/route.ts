@@ -1,5 +1,7 @@
 import { getRandRows } from "@/app/models/gpts";
 
+export const maxDuration = 120;
+
 export async function GET() {
   try {
     const data = await getRandRows(0, 50);
