@@ -2,6 +2,8 @@ import { respData, respErr } from "@/app/utils/resp";
 
 import { spiderGpts } from "@/app/services/spider";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     if (req.body) {

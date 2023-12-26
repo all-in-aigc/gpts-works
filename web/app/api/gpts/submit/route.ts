@@ -4,6 +4,8 @@ import { respData, respErr } from "@/app/utils/resp";
 import { extractGptsUuid } from "@/app/utils/gpts";
 import { fetchGpts } from "@/app/services/gpts";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   try {
     if (req.body) {

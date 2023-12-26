@@ -4,6 +4,8 @@ import { User } from "@/app/types/user";
 import { currentUser } from "@clerk/nextjs";
 import { saveUser } from "@/app/services/user";
 
+export const maxDuration = 120;
+
 export async function GET(req: Request) {
   const user = await currentUser();
   if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {

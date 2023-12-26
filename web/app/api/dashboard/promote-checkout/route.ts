@@ -9,6 +9,8 @@ import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs";
 import { genOrderNo } from "@/app/utils/order";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   const user = await currentUser();
   if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {

@@ -3,6 +3,8 @@ import { Gpts } from "@/app/types/gpts";
 import { Metadata } from "next";
 import { getFeedGpts } from "@/app/models/user_gpts";
 
+export const maxDuration = 120;
+
 async function getData(page: number): Promise<Gpts[] | undefined> {
   const limit = 100;
   const gpts_list = await getFeedGpts(page, limit);

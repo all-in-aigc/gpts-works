@@ -4,6 +4,8 @@ import { respData, respErr } from "@/app/utils/resp";
 import { getRowsByName } from "@/app/models/gpts";
 import { searchGpts } from "@/app/services/gpts";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   const { question, keyword } = await req.json();
   if (!question && !keyword) {

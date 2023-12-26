@@ -5,6 +5,8 @@ import { respData, respErr } from "@/app/utils/resp";
 import { currentUser } from "@clerk/nextjs";
 import { extractGptsUuid } from "@/app/utils/gpts";
 
+export const maxDuration = 120;
+
 export async function POST(req: Request) {
   const user = await currentUser();
   if (!user || !user.emailAddresses || user.emailAddresses.length === 0) {

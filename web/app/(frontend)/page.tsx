@@ -8,6 +8,8 @@ import ProductHunt from "@/app/components/ProductHunt";
 import Search from "@/app/components/Search";
 import Tips from "@/app/components/Tips";
 
+export const maxDuration = 120;
+
 async function getData(): Promise<Gpts[] | undefined> {
   const gpts_list = await getRecommendedRows(1, 100);
 
