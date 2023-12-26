@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Header
+from typing import Optional
 from pydantic import BaseModel
 from services.index import build_index_for_gpts_list
 from services.search import search_gpts
@@ -13,8 +14,8 @@ gpts_router = APIRouter()
 
 class SearchReq(BaseModel):
     question: str
-    top_k: int
-    min_score: float
+    top_k: Optional[int] = 10
+    min_score: Optional(float) = 0.80
 
 
 @gpts_router.post("/gpts/index")
