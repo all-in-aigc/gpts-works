@@ -201,7 +201,7 @@ export async function findByUuid(uuid: string): Promise<Gpts | undefined> {
   return gpts;
 }
 
-function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
+export function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
   if (res.rowCount === 0) {
     return [];
   }
@@ -219,7 +219,7 @@ function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
 }
 
 export function formatGpts(row: QueryResultRow): Gpts | undefined {
-  const gpts: Gpts = {
+  let gpts: Gpts = {
     uuid: row.uuid,
     org_id: row.org_id,
     name: row.name,
@@ -234,7 +234,16 @@ export function formatGpts(row: QueryResultRow): Gpts | undefined {
     avatar_cdn_url: row.avatar_cdn_url,
     detail: row.detail,
     rating: row.rating,
+    submitted_at: row.submitted_at,
   };
+
+  if (row.submitted_at > 0 && row.submitted_user_email) {
+    gpts.submitted_user = {
+      email: row.submitted_user_email,
+      nickname: row.submitted_user_name,
+      avatar_url: row.submitted_user_avatar,
+    };
+  }
 
   if (gpts.avatar_cdn_url) {
     gpts.avatar_url = gpts.avatar_cdn_url;

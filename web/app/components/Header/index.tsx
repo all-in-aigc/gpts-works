@@ -2,6 +2,7 @@
 
 import { BsGithub, BsTwitter } from "react-icons/bs";
 
+import DropDown from "../DropDown";
 import { usePathname } from "next/navigation";
 
 export default () => {
@@ -23,6 +24,19 @@ export default () => {
 
         <div className="flex-1">
           <ul className="md:flex float-right flex text-lg text-slate-700 mr-4 items-center">
+            <li className="mx-4 hidden md:block">
+              <a
+                href="/feed"
+                target="_self"
+                className={
+                  pathname === "/feed"
+                    ? "text-[#2752f4]"
+                    : "hover:text-[#2752f4]"
+                }
+              >
+                Feed
+              </a>
+            </li>
             <li className="mx-4 hidden md:block">
               <a
                 href="/extension"
@@ -66,17 +80,15 @@ export default () => {
           </ul>
         </div>
         <a
-          className="hidden md:block"
+          className="mr-4"
           href="https://www.buymeacoffee.com/idoubi"
           target="_blank"
         >
           <svg
-            width="27"
-            height="39"
             viewBox="0 0 27 39"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 fill-current"
+            className="h-6 w-6 md:h-8 md:w-8 fill-current"
           >
             <path
               d="M14.3206 17.9122C12.9282 18.5083 11.3481 19.1842 9.30013 19.1842C8.44341 19.1824 7.59085 19.0649 6.76562 18.8347L8.18203 33.3768C8.23216 33.9847 8.50906 34.5514 8.95772 34.9645C9.40638 35.3776 9.994 35.6069 10.6039 35.6068C10.6039 35.6068 12.6122 35.7111 13.2823 35.7111C14.0036 35.7111 16.1662 35.6068 16.1662 35.6068C16.776 35.6068 17.3635 35.3774 17.8121 34.9643C18.2606 34.5512 18.5374 33.9846 18.5876 33.3768L20.1046 17.3073C19.4267 17.0757 18.7425 16.9219 17.9712 16.9219C16.6372 16.9214 15.5623 17.3808 14.3206 17.9122Z"
@@ -89,8 +101,12 @@ export default () => {
           </svg>
         </a>
 
-        <div className="ml:0 md:ml-8">
+        <div className="ml:0 md:ml-8 hidden md:block">
           <a href="/dashboard/my-gpts">Dashboard</a>
+        </div>
+
+        <div className="md:hidden">
+          <DropDown />
         </div>
       </div>
     </header>

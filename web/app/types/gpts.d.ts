@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface Gpts {
   uuid: string;
   org_id: string;
@@ -14,6 +16,8 @@ export interface Gpts {
   avatar_cdn_url?: string;
   rating?: number;
   is_promoted?: boolean;
+  submitted_at?: string;
+  submitted_user?: User;
 }
 
 export interface UserGpts {

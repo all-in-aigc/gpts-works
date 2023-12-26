@@ -6,8 +6,9 @@ export default () => {
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24">
         <div className="flex flex-row justify-between max-[767px]:flex-col max-[767px]:items-start">
           <div className="max-[767px]: w-full max-w-[560px] max-[991px]:mr-4 max-[991px]:flex-initial">
-            <p className="text-3xl font-bold md:text-5xl">
-              Find fantastic GPTs all over the world.
+            <p className="text-lg md:text-3xl font-normal md:leading-relaxed">
+              Third-party GPTs store. Collect awesome GPTs, Seach GPTs by
+              chatting.
             </p>
           </div>
           <div className="max-[767px]: max-[991px]:ml-4 max-[991px]:flex-none max-[767px]:mt-8">
@@ -64,7 +65,11 @@ export default () => {
           <div className="max-[991px]:flex-none">
             <p className="text-[#636262] max-[479px]:text-sm pb-8">
               {" "}
-              © Copyright 2023. All rights reserved.{" "}
+              © Copyright{" "}
+              <a className="text-primary" href="https://gpts.works">
+                gpts.works
+              </a>
+              . All rights reserved.{" "}
             </p>
           </div>
         </div>

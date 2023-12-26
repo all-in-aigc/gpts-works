@@ -1,5 +1,5 @@
 import { Gpts, UserGpts } from "@/app/types/gpts";
-import { formatGpts, getByUuids } from "./gpts";
+import { formatGpts, getByUuids, getGptsFromSqlResult } from "./gpts";
 
 import { getUserPromotedUuids } from "./order";
 import { sql } from "@vercel/postgres";
@@ -74,6 +74,29 @@ export async function getUserGpts(
       }
     }
   }
+
+  return gpts;
+}
+
+export async function getFeedGpts(
+  page: number,
+  limit: number
+): Promise<Gpts[] | undefined> {
+  if (page < 1) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const res =
+    await sql`select g.*, ug.created_at as submitted_at, ug.user_email as submitted_user_email, u.nickname as submitted_user_name, u.avatar_url as submitted_user_avatar from user_gpts as ug left join gpts as g on ug.gpts_uuid = g.uuid left join users as u on ug.user_email = u.email order by ug.id desc limit ${limit} offset ${offset}`;
+  if (res.rowCount === 0) {
+    return undefined;
+  }
+
+  const gpts = getGptsFromSqlResult(res);
 
   return gpts;
 }

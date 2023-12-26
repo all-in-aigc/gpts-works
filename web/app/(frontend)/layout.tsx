@@ -11,13 +11,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s in Third-party GPT store | GPTs Works ",
-    default: "GPTs Works",
+    template: "%s in Third-party GPT store | GPTs Works",
+    default: "Third-party GPT store | GPTs Works",
   },
   description:
-    "GPTs Works is a Third-party GPTs store. Support seach GPTs by chatting.",
+    "GPTs Works is a Third-party GPTs store. Collect awesome GPTs, Seach GPTs by chatting.",
   keywords:
-    "GPTs, GPTs store, GPTs Works, ChatGPT, OpenAI GPTs, vector search GPTs",
+    "GPTs Works, GPTs, GPT Store, GPTs store, ChatGPT, OpenAI GPTs, vector search GPTs",
 };
 
 export default function RootLayout({
