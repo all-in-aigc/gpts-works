@@ -56,6 +56,7 @@ async def build_gpts_index(authorization: str = Header(None)):
 
 @gpts_router.post("/gpts/search")
 async def search_gpts_with_question(req: SearchReq, authorization: str = Header(None)):
+    print("search gpts: ", req.question, req.top_k, req.min_score)
     indexApiKey = os.getenv("INDEX_API_KEY")
     authApiKey = ""
     if authorization:

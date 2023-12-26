@@ -1,5 +1,5 @@
 import { Category } from "@/app/types/category";
-import { sql } from "@vercel/postgres";
+import { db } from "@vercel/postgres";
 
 export async function getCategories(
   page: number,
@@ -12,8 +12,10 @@ export async function getCategories(
     limit = 50;
   }
   const offset = (page - 1) * limit;
+
+  const client = await db.connect();
   const res =
-    await sql`select * from categories order by sort desc, id asc limit ${limit} offset ${offset}`;
+    await client.sql`select * from categories order by sort desc, id asc limit ${limit} offset ${offset}`;
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -35,7 +37,9 @@ export async function getCategories(
 export async function findCategoryBySlug(
   slug: string
 ): Promise<Category | undefined> {
-  const res = await sql`SELECT * FROM categories WHERE slug = ${slug} LIMIT 1`;
+  const client = await db.connect();
+  const res =
+    await client.sql`SELECT * FROM categories WHERE slug = ${slug} LIMIT 1`;
   if (res.rowCount === 0) {
     return undefined;
   }

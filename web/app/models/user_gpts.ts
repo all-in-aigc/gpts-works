@@ -1,13 +1,14 @@
 import { Gpts, UserGpts } from "@/app/types/gpts";
 import { formatGpts, getByUuids, getGptsFromSqlResult } from "./gpts";
 
+import { db } from "@vercel/postgres";
 import { getUserPromotedUuids } from "./order";
-import { sql } from "@vercel/postgres";
 
 export async function insertUserGpts(userEmail: string, gptsUuid: string) {
   const createdAt: string = new Date().toISOString();
 
-  const res = await sql`INSERT INTO user_gpts 
+  const client = await db.connect();
+  const res = await client.sql`INSERT INTO user_gpts 
       (user_email, gpts_uuid, created_at) 
       VALUES 
       (${userEmail}, ${gptsUuid}, ${createdAt})
@@ -20,8 +21,9 @@ export async function findUserGpts(
   userEmail: string,
   gptsUuid: string
 ): Promise<UserGpts | undefined> {
+  const client = await db.connect();
   const res =
-    await sql`SELECT * FROM user_gpts WHERE user_email = ${userEmail} AND gpts_uuid = ${gptsUuid} LIMIT 1`;
+    await client.sql`SELECT * FROM user_gpts WHERE user_email = ${userEmail} AND gpts_uuid = ${gptsUuid} LIMIT 1`;
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -50,8 +52,9 @@ export async function getUserGpts(
   }
   const offset = (page - 1) * limit;
 
+  const client = await db.connect();
   const res =
-    await sql`SELECT * FROM user_gpts WHERE user_email = ${user_email} ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
+    await client.sql`SELECT * FROM user_gpts WHERE user_email = ${user_email} ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -90,8 +93,9 @@ export async function getFeedGpts(
   }
   const offset = (page - 1) * limit;
 
+  const client = await db.connect();
   const res =
-    await sql`select g.*, ug.created_at as submitted_at, ug.user_email as submitted_user_email, u.nickname as submitted_user_name, u.avatar_url as submitted_user_avatar from user_gpts as ug left join gpts as g on ug.gpts_uuid = g.uuid left join users as u on ug.user_email = u.email order by ug.id desc limit ${limit} offset ${offset}`;
+    await client.sql`select g.*, ug.created_at as submitted_at, ug.user_email as submitted_user_email, u.nickname as submitted_user_name, u.avatar_url as submitted_user_avatar from user_gpts as ug left join gpts as g on ug.gpts_uuid = g.uuid left join users as u on ug.user_email = u.email order by ug.id desc limit ${limit} offset ${offset}`;
   if (res.rowCount === 0) {
     return undefined;
   }

@@ -2,14 +2,16 @@ import {
   QueryResult,
   QueryResultRow,
   createClient,
-  sql,
+  db,
 } from "@vercel/postgres";
 
 import { User } from "@/app/types/user";
 
 export async function insertUser(user: User) {
   const createdAt: string = new Date().toISOString();
-  const res = await sql`INSERT INTO users 
+
+  const client = await db.connect();
+  const res = await client.sql`INSERT INTO users 
       (email, nickname, avatar_url, created_at) 
       VALUES 
       (${user.email}, ${user.nickname}, ${user.avatar_url}, ${createdAt})
@@ -21,7 +23,9 @@ export async function insertUser(user: User) {
 export async function findUserByEmail(
   email: string
 ): Promise<User | undefined> {
-  const res = await sql`SELECT * FROM users WHERE email = ${email} LIMIT 1`;
+  const client = await db.connect();
+  const res =
+    await client.sql`SELECT * FROM users WHERE email = ${email} LIMIT 1`;
   if (res.rowCount === 0) {
     return undefined;
   }
