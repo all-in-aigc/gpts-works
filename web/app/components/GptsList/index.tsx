@@ -33,7 +33,7 @@ export default ({ gpts, loading }: Props) => {
                         className="mr-4 inline-block h-16 w-16 object-cover rounded-full"
                       />
                       <div className="flex flex-col">
-                        <h6 className="text-base font-semibold">{item.name}</h6>
+                        <p className="text-base font-semibold">{item.name}</p>
                         <p className="text-sm text-[#636262]">
                           {item.author_name}
                         </p>

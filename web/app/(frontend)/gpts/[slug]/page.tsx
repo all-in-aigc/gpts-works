@@ -10,6 +10,7 @@ import Brand from "@/app/components/Brand";
 import Categories from "@/app/components/Categories";
 import { Gpts } from "@/app/types/gpts";
 import GptsList from "@/app/components/GptsList";
+import { Metadata } from "next";
 import ProductHunt from "@/app/components/ProductHunt";
 import Search from "@/app/components/Search";
 import Tips from "@/app/components/Tips";
@@ -19,21 +20,45 @@ import { searchGpts } from "@/app/services/gpts";
 
 export const maxDuration = 120;
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const slug = params.slug;
+
+  let title = "Category GPTs";
+
+  if (!slug.startsWith("query-")) {
+    const category = await findCategoryBySlug(slug);
+    if (category && category.name) {
+      title = `${category.name} GPTs`;
+    }
+  }
+
+  return {
+    title: title,
+    alternates: {
+      canonical: `${process.env.WEB_BASE_URI}/${params.slug}`,
+    },
+  };
+}
+
 async function getData(slug: string): Promise<Gpts[] | undefined> {
   console.log("gpts slug:", slug);
 
   if (slug === "featured") {
-    const gpts_list = await getRecommendedRows(1, 100);
+    const gpts_list = await getRecommendedRows(1, 50);
     return gpts_list;
   }
 
   if (slug === "latest") {
-    const gpts_list = await getLatestRows(1, 100);
+    const gpts_list = await getLatestRows(1, 50);
     return gpts_list;
   }
 
   if (slug === "random") {
-    const gpts_list = await getRandRows(1, 100);
+    const gpts_list = await getRandRows(1, 50);
     return gpts_list;
   }
 
@@ -51,7 +76,7 @@ async function getData(slug: string): Promise<Gpts[] | undefined> {
     }
 
     question = `Which GPTs can be categorized as '${category.name}'?`;
-    top_k = 100;
+    top_k = 50;
     min_score = 0.7;
   }
 

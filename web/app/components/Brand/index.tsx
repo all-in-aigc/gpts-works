@@ -11,13 +11,13 @@ export default ({ count }: Props) => {
     <section className="relatve">
       <div className="mx-auto w-full max-w-7xl px-4 mt-12 md:mt-24">
         <div className="mx-auto w-full max-w-6xl text-center">
-          <h2 className="text-3xl font-bold md:text-7xl">
+          <h1 className="text-3xl font-bold md:text-7xl">
             Third-party GPTs store
+          </h1>
+          <h2 className="mt-4 mb-4 md:mt-8 md:mb-4 text:lg md:text-4xl text-center">
+            <span className="text-primary font-bold">{count}</span> awesome GPTs
+            stored
           </h2>
-          <div className="mt-4 mb-4 md:mt-8 md:mb-4 text:lg md:text-4xl text-center">
-            <span className="text-primary font-bold">{count}</span> fantastic
-            GPTs stored
-          </div>
         </div>
       </div>
       <img

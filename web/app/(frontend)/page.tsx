@@ -4,11 +4,21 @@ import Brand from "@/app/components/Brand";
 import Categories from "@/app/components/Categories";
 import { Gpts } from "@/app/types/gpts";
 import GptsList from "@/app/components/GptsList";
+import { Metadata } from "next";
 import ProductHunt from "@/app/components/ProductHunt";
 import Search from "@/app/components/Search";
 import Tips from "@/app/components/Tips";
 
 export const maxDuration = 120;
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Featured GPTs in Third-party GPT store | GPTs Works",
+    alternates: {
+      canonical: `${process.env.WEB_BASE_URI}`,
+    },
+  };
+}
 
 async function getData(): Promise<Gpts[] | undefined> {
   const gpts_list = await getRecommendedRows(1, 100);
