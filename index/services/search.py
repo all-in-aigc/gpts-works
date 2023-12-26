@@ -10,7 +10,7 @@ def search_gpts(question, top_k=10, min_score=0.80):
     storage_context = get_storage_context()
     index = VectorStoreIndex.from_documents([], storage_context=storage_context)
 
-    retriever = VectorIndexRetriever(index=index, similarity_top_k=top)
+    retriever = VectorIndexRetriever(index=index, similarity_top_k=top_k)
 
     nodes = retriever.retrieve(question)
 

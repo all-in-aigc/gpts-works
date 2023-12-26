@@ -36,9 +36,12 @@ async function getData(slug: string): Promise<Gpts[] | undefined> {
   }
 
   let question: string = "";
+  let top_k: number = 10;
+  let min_score: number = 0.8;
 
   if (slug.startsWith("query-")) {
     question = decodeURIComponent(slug.replace("query-", ""));
+    top_k = 20;
   } else {
     const category = await findCategoryBySlug(slug);
     if (!category || !category.name) {
@@ -46,12 +49,14 @@ async function getData(slug: string): Promise<Gpts[] | undefined> {
     }
 
     question = `Which GPTs can be categorized as '${category.name}'?`;
+    top_k = 100;
+    min_score = 0.7;
   }
 
   console.log("query question:", question);
 
   const dbData = await getRowsByName(question);
-  const vectorData = await searchGpts(question);
+  const vectorData = await searchGpts(question, top_k, min_score);
   console.log("gpts in db", dbData);
   console.log("gpts in vector", vectorData);
 
