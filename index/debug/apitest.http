@@ -15,6 +15,6 @@ Content-Type: application/json
 Authorization: Bearer {{apiKey}}
 
 {
-    "question": "I want a coding assistant"
+    "question": "I want a travel GPTs"
 }
 

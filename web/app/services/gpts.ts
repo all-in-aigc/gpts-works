@@ -45,12 +45,24 @@ export const getGptsUrlsFromFile = () => {
   }
 };
 
-export const searchGpts = async (question: string): Promise<Gpts[]> => {
+export const searchGpts = async (
+  question: string,
+  top_k?: number,
+  min_score?: number
+): Promise<Gpts[]> => {
+  if (!top_k) {
+    top_k = 10;
+  }
+  if (!min_score) {
+    min_score = 0.8;
+  }
+
   const uri = `${process.env.INDEX_API_BASE_URI}/gpts/search`;
+
   const data = {
     question: question,
-    top_k: 100,
-    min_score: 0.7,
+    top_k: top_k,
+    min_score: min_score,
   };
 
   try {
