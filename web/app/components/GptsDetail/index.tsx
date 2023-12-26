@@ -44,6 +44,7 @@ export default ({ gpts }: Props) => {
                 <input
                   type="checkbox"
                   className="mr-2"
+                  readOnly
                   checked={tools && tools.includes("browser")}
                 />
                 Web Browsing
@@ -52,6 +53,7 @@ export default ({ gpts }: Props) => {
                 <input
                   type="checkbox"
                   className="mr-2"
+                  readOnly
                   checked={tools && tools.includes("dalle")}
                 />
                 DALL·E Image Generation
@@ -60,6 +62,7 @@ export default ({ gpts }: Props) => {
                 <input
                   type="checkbox"
                   className="mr-2"
+                  readOnly
                   checked={tools && tools.includes("python")}
                 />
                 Code Interpreter

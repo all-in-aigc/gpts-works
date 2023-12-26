@@ -6,11 +6,11 @@ from llama_index.retrievers import (
 from models.gpts import get_gpts_by_uuids
 
 
-def search_gpts(question):
+def search_gpts(question, top_k=10, min_score=0.80):
     storage_context = get_storage_context()
     index = VectorStoreIndex.from_documents([], storage_context=storage_context)
 
-    retriever = VectorIndexRetriever(index=index, similarity_top_k=10)
+    retriever = VectorIndexRetriever(index=index, similarity_top_k=top)
 
     nodes = retriever.retrieve(question)
 
@@ -18,8 +18,8 @@ def search_gpts(question):
     uuids_with_scores = {}
     gpts = []
     for node in nodes:
-        print("node metadata", node.metadata)
-        if node.score > 0.80:
+        print("node metadata", node.metadata, node.score)
+        if node.score > min_score:
             uuid = node.metadata["uuid"]
             uuids.append(uuid)
             uuids_with_scores[uuid] = node.score

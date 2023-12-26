@@ -11,13 +11,14 @@ import {
 } from "react";
 
 import { Gpts } from "@/app/types/gpts";
+import { useRouter } from "next/navigation";
 
 interface Props {
-  setGpts: Dispatch<SetStateAction<Gpts[]>>;
-  setLoading: Dispatch<SetStateAction<boolean>>;
+  query?: string;
 }
 
-export default ({ setGpts, setLoading }: Props) => {
+export default ({ query }: Props) => {
+  const router = useRouter();
   const [inputDisabled, setInputDisabled] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [content, setContent] = useState("");
@@ -37,43 +38,32 @@ export default ({ setGpts, setLoading }: Props) => {
 
   const handleSubmit = async (keyword: string, question: string) => {
     try {
-      const uri = "/api/gpts/search";
-      const params = {
-        keyword: keyword,
-        question: question,
-      };
-
-      setLoading(true);
-      const resp = await fetch(uri, {
-        method: "POST",
-        body: JSON.stringify(params),
-      });
-      setLoading(false);
-
-      if (resp.ok) {
-        const res = await resp.json();
-        if (res.data) {
-          setGpts(res.data);
-        }
-      }
+      const url = `/gpts/query-${encodeURIComponent(question)}`;
+      console.log("query url", url);
+      router.push(url);
+      setInputDisabled(true);
     } catch (e) {
       console.log("search failed: ", e);
     }
   };
 
   useEffect(() => {
-    if (content) {
-      // handleSubmit(content, "");
+    if (query) {
+      setContent(query);
     }
-  }, [content]);
+  }, [query]);
 
   return (
-    <section className="relatve mt-4 md:mt-8">
+    <section className="relatve mt-4 md:mt-4">
       <div className="mx-auto w-full max-w-2xl px-6 text-center">
-        <div className="flex items-center relative">
+        <form
+          method="POST"
+          action="/gpts/search"
+          className="flex items-center relative"
+        >
           <input
             type="text"
-            className="text-sm md:text-md flex-1 px-4 py-3 border-2 border-primary bg-white rounded-lg"
+            className="text-sm md:text-md flex-1 px-4 py-3 border-2 border-primary bg-white rounded-lg disabled:border-gray-300 disabled:text-gray-300"
             placeholder="keyword or prompt for searching GPTs"
             ref={inputRef}
             value={content}
@@ -101,7 +91,7 @@ export default ({ setGpts, setLoading }: Props) => {
             <polyline points="9 10 4 15 9 20"></polyline>
             <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
           </svg>
-        </div>
+        </form>
       </div>
     </section>
   );

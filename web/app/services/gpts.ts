@@ -49,6 +49,8 @@ export const searchGpts = async (question: string): Promise<Gpts[]> => {
   const uri = `${process.env.INDEX_API_BASE_URI}/gpts/search`;
   const data = {
     question: question,
+    top_k: 100,
+    min_score: 0.7,
   };
 
   try {

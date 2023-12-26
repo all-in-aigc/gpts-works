@@ -13,6 +13,8 @@ gpts_router = APIRouter()
 
 class SearchReq(BaseModel):
     question: str
+    top_k: int
+    min_score: float
 
 
 @gpts_router.post("/gpts/index")
@@ -62,9 +64,15 @@ async def search_gpts_with_question(req: SearchReq, authorization: str = Header(
 
     if req.question == "":
         return resp_err("invalid params")
+    if req.top_k <= 0:
+        req.top_k = 10
+    if req.min_score <= 0:
+        req.min_score = 0.80
 
     try:
-        gpts = search_gpts(question=req.question)
+        gpts = search_gpts(
+            question=req.question, top_k=req.top_k, min_score=req.min_score
+        )
 
         return resp_data(gpts)
     except Exception as e:

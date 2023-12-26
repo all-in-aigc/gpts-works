@@ -1,57 +1,32 @@
-"use client";
+import { getRecommendedRows, getTotalCount } from "../models/gpts";
 
-import { useEffect, useState } from "react";
+import Brand from "@/app/components/Brand";
+import Categories from "@/app/components/Categories";
+import { Gpts } from "@/app/types/gpts";
+import GptsList from "@/app/components/GptsList";
+import ProductHunt from "@/app/components/ProductHunt";
+import Search from "@/app/components/Search";
+import Tips from "@/app/components/Tips";
 
-import Brand from "../components/Brand";
-import { Gpts } from "../types/gpts";
-import GptsList from "../components/GptsList";
-import ProductHunt from "../components/ProductHunt";
-import Search from "../components/Search";
-import Tab from "../components/Tab";
+async function getData(): Promise<Gpts[] | undefined> {
+  const gpts_list = await getRecommendedRows(1, 100);
 
-export default () => {
-  const [gpts, setGpts] = useState<Gpts[]>([]);
-  const [gptsCount, setGptsCount] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [tabValue, setTabValue] = useState("hot");
+  return gpts_list;
+}
 
-  const fetchGpts = async (tab: string) => {
-    const params = {
-      last_id: 0,
-      limit: 50,
-      tab: tab,
-    };
-
-    setLoading(true);
-    const resp = await fetch("/api/gpts/all", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(params),
-    });
-    setLoading(false);
-
-    if (resp.ok) {
-      const res = await resp.json();
-      if (res.data) {
-        setGptsCount(res.data.count);
-        setGpts(res.data.rows);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchGpts(tabValue);
-  }, [tabValue]);
+export default async () => {
+  const gpts_list = await getData();
+  const gpts_count = await getTotalCount();
 
   return (
     <>
-      <Brand count={gptsCount} />
+      <Brand count={gpts_count} />
       <ProductHunt />
-      <Search setGpts={setGpts} setLoading={setLoading} />
-      <Tab tabValue={tabValue} setTabValue={setTabValue} />
-      <GptsList gpts={gpts} loading={loading} />
+      <Search />
+      <Tips />
+      <Categories activeSlug="featured" />
+      {/* <Tab tabValue={tabValue} setTabValue={setTabValue} /> */}
+      {gpts_list && <GptsList gpts={gpts_list} loading={false} />}
     </>
   );
 };

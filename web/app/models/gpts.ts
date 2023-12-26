@@ -106,7 +106,7 @@ export async function getRows(page: number, limit: number): Promise<Gpts[]> {
 export async function getRowsByName(name: string): Promise<Gpts[]> {
   const keyword = `%${name}%`;
   const res =
-    await sql`SELECT * FROM gpts WHERE name ILIKE ${keyword} ORDER BY sort DESC LIMIT 50`;
+    await sql`SELECT * FROM gpts WHERE name ILIKE ${keyword} ORDER BY sort DESC LIMIT 100`;
 
   return getGptsFromSqlResult(res);
 }
@@ -129,29 +129,53 @@ export async function getByUuids(uuids: string[]): Promise<Gpts[]> {
 }
 
 export async function getRandRows(
-  last_id: number,
+  page: number,
   limit: number
 ): Promise<Gpts[]> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
   const res =
-    await sql`SELECT * FROM gpts WHERE id > ${last_id} ORDER BY RANDOM() LIMIT ${limit}`;
+    await sql`SELECT * FROM gpts ORDER BY RANDOM() LIMIT ${limit} OFFSET ${offset}`;
 
   return getGptsFromSqlResult(res);
 }
 
 export async function getLatestRows(
-  last_id: number,
+  page: number,
   limit: number
 ): Promise<Gpts[]> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
   const res =
-    await sql`SELECT * FROM gpts WHERE id > ${last_id} ORDER BY created_at DESC LIMIT ${limit}`;
+    await sql`SELECT * FROM gpts ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
 
   return getGptsFromSqlResult(res);
 }
 
 export async function getRecommendedRows(
-  last_id: number,
+  page: number,
   limit: number
 ): Promise<Gpts[]> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
   let user_promoted_gpts = await getPromotedGpts();
   if (!user_promoted_gpts) {
     user_promoted_gpts = [];
@@ -159,7 +183,7 @@ export async function getRecommendedRows(
   console.log("user_promoted_gpts count: ", user_promoted_gpts.length);
 
   const res =
-    await sql`SELECT * FROM gpts WHERE is_recommended=true AND id > ${last_id} ORDER BY sort DESC LIMIT ${limit}`;
+    await sql`SELECT * FROM gpts WHERE is_recommended=true ORDER BY sort DESC LIMIT ${limit} OFFSET ${offset}`;
 
   const system_promoted_gpts = getGptsFromSqlResult(res);
 

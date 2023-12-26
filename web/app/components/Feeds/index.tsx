@@ -13,7 +13,7 @@ export default ({ gpts_list }: Props) => {
         {gpts_list &&
           gpts_list.map((gpts: Gpts, idx: number) => (
             <>
-              <li key={gpts.uuid}>
+              <li key={idx}>
                 <div className="relative pb-8">
                   <span
                     className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"

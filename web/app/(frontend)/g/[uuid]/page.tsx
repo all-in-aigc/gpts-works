@@ -1,9 +1,8 @@
-import { BsDownload } from "react-icons/bs";
 import { Gpts } from "@/app/types/gpts";
 import GptsDetail from "@/app/components/GptsDetail";
-import Image from "next/image";
-import extensionSrc from "@/public/extension.png";
 import { findByUuid } from "@/app/models/gpts";
+import { redirect } from "next/navigation";
+import { renameShortUrl } from "@/app/utils/gpts";
 
 async function getData(uuid: string): Promise<Gpts | undefined> {
   if (!uuid) {
@@ -17,6 +16,10 @@ async function getData(uuid: string): Promise<Gpts | undefined> {
 
 export default async ({ params }: { params: { uuid: string } }) => {
   const data = await getData(params.uuid);
+  if (data) {
+    const url = renameShortUrl(data.short_url, data.uuid);
+    redirect(`/${url}`);
+  }
 
   return (
     <section className="relatve">

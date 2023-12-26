@@ -47,3 +47,10 @@ CREATE TABLE promote_orders (
     paied_at timestamptz,
     stripe_session_id VARCHAR(255)
 );
+
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    sort INTEGER NOT NULL DEFAULT 0
+);
