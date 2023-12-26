@@ -15,7 +15,7 @@ gpts_router = APIRouter()
 class SearchReq(BaseModel):
     question: str
     top_k: Optional[int] = 10
-    min_score: Optional(float) = 0.80
+    min_score: Optional[float] = 0.80
 
 
 @gpts_router.post("/gpts/index")
