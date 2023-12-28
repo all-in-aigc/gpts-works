@@ -1,5 +1,5 @@
 import { Category } from "@/app/types/category";
-import { db } from "@vercel/postgres";
+import { getDb } from "@/app/models/db";
 
 export async function getCategories(
   page: number,
@@ -13,9 +13,11 @@ export async function getCategories(
   }
   const offset = (page - 1) * limit;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`select * from categories order by sort desc, id asc limit ${limit} offset ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `select * from categories order by sort desc limit $1 offset $2`,
+    [limit, offset]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -37,9 +39,11 @@ export async function getCategories(
 export async function findCategoryBySlug(
   slug: string
 ): Promise<Category | undefined> {
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM categories WHERE slug = ${slug} LIMIT 1`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM categories WHERE slug = $1 LIMIT 1`,
+    [slug]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -53,4 +57,14 @@ export async function findCategoryBySlug(
   };
 
   return category;
+}
+
+export async function insertCategory(slug: string, name: string, sort: number) {
+  const db = getDb();
+  await db.query(
+    `insert into categories (slug, name, sort) values ($1, $2, $3)`,
+    [slug, name, sort]
+  );
+
+  return;
 }

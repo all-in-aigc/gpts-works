@@ -24,7 +24,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async () => {
   let page = 1;
   const gpts_list = await getData(page);
-  console.log("gpts list", gpts_list);
 
   return (
     <section className="relative">

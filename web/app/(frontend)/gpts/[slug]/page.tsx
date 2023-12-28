@@ -84,8 +84,8 @@ async function getData(slug: string): Promise<Gpts[] | undefined> {
 
   const dbData = await getRowsByName(question);
   const vectorData = await searchGpts(question, top_k, min_score);
-  console.log("gpts in db", dbData);
-  console.log("gpts in vector", vectorData);
+  console.log("gpts in db count", dbData.length);
+  console.log("gpts in vector count", vectorData.length);
 
   const gpts_list = mergeGptsList(dbData, vectorData);
 

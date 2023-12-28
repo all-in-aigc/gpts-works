@@ -1,15 +1,27 @@
-import { Gpts } from "../types/gpts";
+import { Gpts } from "@/app/types/gpts";
 import { PromoteOrder } from "@/app/types/order";
-import { db } from "@vercel/postgres";
-import { getByUuids } from "./gpts";
+import { getByUuids } from "@/app/models/gpts";
+import { getDb } from "@/app/models/db";
 
 export async function insertPromoteOrder(order: PromoteOrder) {
-  const client = await db.connect();
-  const res = await client.sql`INSERT INTO promote_orders 
+  const db = getDb();
+  const res = await db.query(
+    `INSERT INTO promote_orders 
         (order_no, created_at, user_email, gpts_uuid, amount, plan, expired_at, order_status) 
         VALUES 
-        (${order.order_no}, ${order.created_at}, ${order.user_email}, ${order.gpts_uuid}, ${order.amount}, ${order.plan}, ${order.expired_at}, ${order.order_status})
-    `;
+        ($1, $2, $3, $4, $5, $6, $7, $8)
+    `,
+    [
+      order.order_no,
+      order.created_at,
+      order.user_email,
+      order.gpts_uuid,
+      order.amount,
+      order.plan,
+      order.expired_at,
+      order.order_status,
+    ]
+  );
 
   return res;
 }
@@ -17,9 +29,11 @@ export async function insertPromoteOrder(order: PromoteOrder) {
 export async function findPromoteOrderByOrderNo(
   order_no: number
 ): Promise<PromoteOrder | undefined> {
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM promote_orders WHERE order_no = ${order_no} LIMIT 1`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM promote_orders WHERE order_no = $1 LIMIT 1`,
+    [order_no]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -47,9 +61,11 @@ export async function updatePromoteOrderStatus(
   order_status: number,
   paied_at: string
 ) {
-  const client = await db.connect();
-  const res =
-    await client.sql`UPDATE promote_orders SET order_status=${order_status}, paied_at=${paied_at} WHERE order_no=${order_no}`;
+  const db = getDb();
+  const res = await db.query(
+    `UPDATE promote_orders SET order_status=$1, paied_at=$2 WHERE order_no=$3`,
+    [order_status, paied_at, order_no]
+  );
 
   return res;
 }
@@ -58,18 +74,22 @@ export async function updatePromoteOrderSession(
   order_no: string,
   stripe_session_id: string
 ) {
-  const client = await db.connect();
-  const res =
-    await client.sql`UPDATE promote_orders SET stripe_session_id=${stripe_session_id} WHERE order_no=${order_no}`;
+  const db = getDb();
+  const res = await db.query(
+    `UPDATE promote_orders SET stripe_session_id=$1 WHERE order_no=$2`,
+    [stripe_session_id, order_no]
+  );
 
   return res;
 }
 
 export async function getPromotedGpts(): Promise<Gpts[] | undefined> {
   const now = new Date().toISOString();
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM promote_orders WHERE order_status = 2 AND expired_at >= ${now}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM promote_orders WHERE order_status = 2 AND expired_at >= $1`,
+    [now]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -89,9 +109,11 @@ export async function getUserPromotedUuids(
   user_email: string
 ): Promise<string[] | undefined> {
   const now = new Date().toISOString();
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM promote_orders WHERE user_email = ${user_email} AND order_status = 2 AND expired_at >= ${now}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM promote_orders WHERE user_email = $1 AND order_status = 2 AND expired_at >= $2`,
+    [user_email, now]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }

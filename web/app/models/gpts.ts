@@ -1,18 +1,14 @@
-import {
-  QueryResult,
-  QueryResultRow,
-  createClient,
-  db,
-} from "@vercel/postgres";
-import { mergeArraysUnique, mergeGptsList } from "../utils/gpts";
+import { QueryResult, QueryResultRow } from "pg";
 
 import { Gpts } from "@/app/types/gpts";
-import { getPromotedGpts } from "./order";
+import { getDb } from "@/app/models/db";
+import { getPromotedGpts } from "@/app/models/order";
 import { isGptsSensitive } from "@/app/services/gpts";
+import { mergeGptsList } from "@/app/utils/gpts";
 
 export async function createTable() {
-  const client = await db.connect();
-  const res = await client.sql`CREATE TABLE gpts (
+  const db = getDb();
+  const res = await db.query(`CREATE TABLE gpts (
     id SERIAL PRIMARY KEY,
     uuid VARCHAR(50) UNIQUE NOT NULL,
     org_id VARCHAR(50),
@@ -25,33 +21,50 @@ export async function createTable() {
     created_at timestamptz,
     updated_at timestamptz,
     detail JSON 
-);`;
+);`);
 
   return res;
 }
 
 export async function insertRow(gpts: Gpts) {
-  const client = await db.connect();
-  const res = await client.sql`INSERT INTO gpts 
-    (uuid, org_id, name, description, avatar_url, short_url, author_id, author_name, created_at, updated_at, detail) 
-    VALUES 
-    (${gpts.uuid}, ${gpts.org_id}, ${gpts.name}, ${gpts.description}, ${gpts.avatar_url}, ${gpts.short_url}, ${gpts.author_id}, ${gpts.author_name}, ${gpts.created_at}, ${gpts.updated_at}, ${gpts.detail})
-`;
+  const db = getDb();
+  const res = await db.query(
+    `INSERT INTO gpts 
+  (uuid, org_id, name, description, avatar_url, short_url, author_id, author_name, created_at, updated_at, detail) 
+  VALUES 
+  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+`,
+    [
+      gpts.uuid,
+      gpts.org_id,
+      gpts.name,
+      gpts.description,
+      gpts.avatar_url,
+      gpts.short_url,
+      gpts.author_id,
+      gpts.author_name,
+      gpts.created_at,
+      gpts.updated_at,
+      gpts.detail,
+    ]
+  );
 
   return res;
 }
 
 export async function updateAvatarCdnUrl(uuid: string, avatarCdnUrl: string) {
-  const client = await db.connect();
-  const res =
-    await client.sql`UPDATE gpts SET avatar_cdn_url=${avatarCdnUrl} WHERE uuid=${uuid}`;
+  const db = getDb();
+  const res = await db.query(
+    `UPDATE gpts SET avatar_cdn_url=$1 WHERE uuid=$2`,
+    [avatarCdnUrl, uuid]
+  );
 
   return res;
 }
 
 export async function getUuids(): Promise<string[]> {
-  const client = await db.connect();
-  const res = await client.sql`SELECT uuid FROM gpts`;
+  const db = getDb();
+  const res = await db.query(`SELECT uuid FROM gpts`);
   if (res.rowCount === 0) {
     return [];
   }
@@ -66,8 +79,8 @@ export async function getUuids(): Promise<string[]> {
 }
 
 export async function getNoAvatarCdnUrlUuids(): Promise<string[]> {
-  const client = await db.connect();
-  const res = await client.sql`SELECT uuid FROM gpts WHERE avatar_cdn_url = ''`;
+  const db = getDb();
+  const res = await db.query(`SELECT uuid FROM gpts WHERE avatar_cdn_url = ''`);
   if (res.rowCount === 0) {
     return [];
   }
@@ -90,9 +103,11 @@ export async function getRows(page: number, limit: number): Promise<Gpts[]> {
   }
   const offset = (page - 1) * limit;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM gpts ORDER BY id asc LIMIT ${limit} OFFSET ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM gpts ORDER BY created_at asc LIMIT $1 OFFSET $2`,
+    [limit, offset]
+  );
   if (res.rowCount === 0) {
     return [];
   }
@@ -113,21 +128,23 @@ export async function getRows(page: number, limit: number): Promise<Gpts[]> {
 export async function getRowsByName(name: string): Promise<Gpts[]> {
   const keyword = `%${name}%`;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM gpts WHERE name ILIKE ${keyword} ORDER BY sort DESC LIMIT 100`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM gpts WHERE name ILIKE $1 ORDER BY sort DESC LIMIT 100`,
+    [keyword]
+  );
 
   return getGptsFromSqlResult(res);
 }
 
 export async function getByUuids(uuids: string[]): Promise<Gpts[]> {
-  const client = await db.connect();
-
   try {
+    const db = getDb();
     const placeholders = uuids.map((_, index) => `$${index + 1}`).join(", ");
-    const query = `SELECT * FROM gpts WHERE uuid IN (${placeholders})`;
-
-    const res = await client.query(query, uuids);
+    const res = await db.query(
+      `SELECT * FROM gpts WHERE uuid IN (${placeholders})`,
+      uuids
+    );
 
     return getGptsFromSqlResult(res);
   } catch (e) {
@@ -147,9 +164,11 @@ export async function getRandRows(
   }
   const offset = (page - 1) * limit;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM gpts ORDER BY RANDOM() LIMIT ${limit} OFFSET ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM gpts ORDER BY RANDOM() LIMIT $1 OFFSET $2`,
+    [limit, offset]
+  );
 
   return getGptsFromSqlResult(res);
 }
@@ -166,9 +185,11 @@ export async function getLatestRows(
   }
   const offset = (page - 1) * limit;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM gpts ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM gpts ORDER BY created_at DESC LIMIT $1 OFFSET $2`,
+    [limit, offset]
+  );
 
   return getGptsFromSqlResult(res);
 }
@@ -191,29 +212,38 @@ export async function getRecommendedRows(
   }
   console.log("user_promoted_gpts count: ", user_promoted_gpts.length);
 
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM gpts WHERE is_recommended=true ORDER BY sort DESC LIMIT ${limit} OFFSET ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM gpts WHERE is_recommended=true ORDER BY sort DESC LIMIT $1 OFFSET $2`,
+    [limit, offset]
+  );
 
   const system_promoted_gpts = getGptsFromSqlResult(res);
 
   return mergeGptsList(user_promoted_gpts, system_promoted_gpts);
 }
 
-export async function getHotRows(
-  last_id: number,
-  limit: number
-): Promise<Gpts[]> {
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM gpts WHERE rating IS NOT null AND id > ${last_id} ORDER BY rating DESC, sort DESC LIMIT ${limit}`;
+export async function getHotRows(page: number, limit: number): Promise<Gpts[]> {
+  if (page <= 0) {
+    page = 1;
+  }
+  if (limit <= 0) {
+    limit = 50;
+  }
+  const offset = (page - 1) * limit;
+
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM gpts WHERE rating IS NOT null ORDER BY rating DESC, sort DESC LIMIT $1 OFFSET $2`,
+    [limit, offset]
+  );
 
   return getGptsFromSqlResult(res);
 }
 
 export async function getTotalCount(): Promise<number> {
-  const client = await db.connect();
-  const res = await client.sql`SELECT count(1) as count FROM gpts LIMIT 1`;
+  const db = getDb();
+  const res = await db.query(`SELECT count(1) as count FROM gpts LIMIT 1`);
   if (res.rowCount === 0) {
     return 0;
   }
@@ -225,8 +255,10 @@ export async function getTotalCount(): Promise<number> {
 }
 
 export async function findByUuid(uuid: string): Promise<Gpts | undefined> {
-  const client = await db.connect();
-  const res = await client.sql`SELECT * FROM gpts WHERE uuid = ${uuid} LIMIT 1`;
+  const db = getDb();
+  const res = await db.query(`SELECT * FROM gpts WHERE uuid = $1 LIMIT 1`, [
+    uuid,
+  ]);
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -239,7 +271,7 @@ export async function findByUuid(uuid: string): Promise<Gpts | undefined> {
 }
 
 export function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
-  if (res.rowCount === 0) {
+  if (!res.rowCount || res.rowCount === 0) {
     return [];
   }
 

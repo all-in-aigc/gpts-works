@@ -22,6 +22,7 @@
     "langchain": "^0.0.186",
     "moment": "^2.29.4",
     "next": "14.0.0",
+    "pg": "^8.11.3",
     "playwright": "^1.40.0",
     "react": "^18",
     "react-dom": "^18",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/pg": "^8.10.9",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-lazy-load-image-component": "^1.6.3",

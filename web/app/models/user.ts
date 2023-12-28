@@ -1,21 +1,18 @@
-import {
-  QueryResult,
-  QueryResultRow,
-  createClient,
-  db,
-} from "@vercel/postgres";
-
 import { User } from "@/app/types/user";
+import { getDb } from "@/app/models/db";
 
 export async function insertUser(user: User) {
   const createdAt: string = new Date().toISOString();
 
-  const client = await db.connect();
-  const res = await client.sql`INSERT INTO users 
+  const db = await getDb();
+  const res = await db.query(
+    `INSERT INTO users 
       (email, nickname, avatar_url, created_at) 
       VALUES 
-      (${user.email}, ${user.nickname}, ${user.avatar_url}, ${createdAt})
-  `;
+      ($1, $2, $3, $4)
+  `,
+    [user.email, user.nickname, user.avatar_url, createdAt]
+  );
 
   return res;
 }
@@ -23,9 +20,10 @@ export async function insertUser(user: User) {
 export async function findUserByEmail(
   email: string
 ): Promise<User | undefined> {
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM users WHERE email = ${email} LIMIT 1`;
+  const db = getDb();
+  const res = await db.query(`SELECT * FROM users WHERE email = $1 LIMIT 1`, [
+    email,
+  ]);
   if (res.rowCount === 0) {
     return undefined;
   }

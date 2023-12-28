@@ -1,18 +1,21 @@
 import { Gpts, UserGpts } from "@/app/types/gpts";
-import { formatGpts, getByUuids, getGptsFromSqlResult } from "./gpts";
+import { getByUuids, getGptsFromSqlResult } from "./gpts";
 
-import { db } from "@vercel/postgres";
-import { getUserPromotedUuids } from "./order";
+import { getDb } from "@/app/models/db";
+import { getUserPromotedUuids } from "@/app/models/order";
 
 export async function insertUserGpts(userEmail: string, gptsUuid: string) {
   const createdAt: string = new Date().toISOString();
 
-  const client = await db.connect();
-  const res = await client.sql`INSERT INTO user_gpts 
+  const db = getDb();
+  const res = await db.query(
+    `INSERT INTO user_gpts 
       (user_email, gpts_uuid, created_at) 
       VALUES 
-      (${userEmail}, ${gptsUuid}, ${createdAt})
-  `;
+      ($1, $2, $3)
+  `,
+    [userEmail, gptsUuid, createdAt]
+  );
 
   return res;
 }
@@ -21,9 +24,11 @@ export async function findUserGpts(
   userEmail: string,
   gptsUuid: string
 ): Promise<UserGpts | undefined> {
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM user_gpts WHERE user_email = ${userEmail} AND gpts_uuid = ${gptsUuid} LIMIT 1`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM user_gpts WHERE user_email = $1 AND gpts_uuid = $2 LIMIT 1`,
+    [userEmail, gptsUuid]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -52,9 +57,11 @@ export async function getUserGpts(
   }
   const offset = (page - 1) * limit;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`SELECT * FROM user_gpts WHERE user_email = ${user_email} ORDER BY created_at DESC LIMIT ${limit} OFFSET ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `SELECT * FROM user_gpts WHERE user_email = $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3`,
+    [user_email, limit, offset]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }
@@ -93,9 +100,11 @@ export async function getFeedGpts(
   }
   const offset = (page - 1) * limit;
 
-  const client = await db.connect();
-  const res =
-    await client.sql`select g.*, ug.created_at as submitted_at, ug.user_email as submitted_user_email, u.nickname as submitted_user_name, u.avatar_url as submitted_user_avatar from user_gpts as ug left join gpts as g on ug.gpts_uuid = g.uuid left join users as u on ug.user_email = u.email order by ug.id desc limit ${limit} offset ${offset}`;
+  const db = getDb();
+  const res = await db.query(
+    `select g.*, ug.created_at as submitted_at, ug.user_email as submitted_user_email, u.nickname as submitted_user_name, u.avatar_url as submitted_user_avatar from user_gpts as ug left join gpts as g on ug.gpts_uuid = g.uuid left join users as u on ug.user_email = u.email order by ug.id desc limit $1 offset $2`,
+    [limit, offset]
+  );
   if (res.rowCount === 0) {
     return undefined;
   }

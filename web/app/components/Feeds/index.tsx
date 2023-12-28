@@ -12,8 +12,8 @@ export default ({ gpts_list }: Props) => {
       <ul role="list" className="-mb-8">
         {gpts_list &&
           gpts_list.map((gpts: Gpts, idx: number) => (
-            <>
-              <li key={idx}>
+            <div key={idx}>
+              <li>
                 <div className="relative pb-8">
                   <span
                     className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"
@@ -88,7 +88,7 @@ export default ({ gpts_list }: Props) => {
                   </div>
                 </div>
               </li>
-            </>
+            </div>
           ))}
       </ul>
     </div>
