@@ -16,8 +16,8 @@ def init_db():
         user=url.username,
         password=url.password,
         database=url.path[1:],
-        sslmode='require',
-        options='endpoint=ep-twilight-queen-56021949'
+        # sslmode='require',
+        # options="endpoint=ep-twilight-queen-56021949",
     )
     db.generate_mapping(create_tables=True)
 
