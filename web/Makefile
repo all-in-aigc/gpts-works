@@ -2,8 +2,8 @@ dev:
 	pnpm dev --hostname 0.0.0.0 --port 8067
 
 docker-build:
-	docker build -t gpts-works-web -f deploy/Dockerfile . 
+	sudo docker build -t gptsweb:v1.3.2 -f deploy/Dockerfile . 
 
 docker-run:docker-build
-	docker run -d --name=gpts-works-web --restart=always -p 8037:3000 gpts-works-web
+	sudo docker run -d --name=gptsweb --restart=always -p 8037:3000 gptsweb:v1.3.2
 
