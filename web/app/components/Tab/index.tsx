@@ -1,4 +1,7 @@
+"use client";
+
 import { Dispatch, SetStateAction } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Tab } from "@/app/types/tab";
 
@@ -7,19 +10,26 @@ interface Props {
   setTabValue: Dispatch<SetStateAction<string>>;
 }
 
-export default ({ tabValue, setTabValue }: Props) => {
+export default () => {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const tabs: Tab[] = [
     {
-      name: "hot",
+      name: "random",
+      title: "Random",
+      active:
+        pathname === "/" || pathname === "/" || pathname === "/gpts/random",
+    },
+    {
+      name: "featured",
       title: "Featured 🔥",
+      active: pathname === "/gpts/featured",
     },
     {
       name: "latest",
       title: "Latest",
-    },
-    {
-      name: "random",
-      title: "Random",
+      active: pathname === "/gpts/latest",
     },
   ];
 
@@ -35,10 +45,9 @@ export default ({ tabValue, setTabValue }: Props) => {
               <a
                 role="tab"
                 key={idx}
-                className={`tab ${
-                  tabValue === tab.name ? "bg-primary text-white" : ""
-                }`}
-                onClick={() => setTabValue(tab.name)}
+                className={`tab ${tab.active ? "bg-primary text-white" : ""}`}
+                // onClick={() => router.push(`/gpts/${tab.name}`)}
+                href={`/gpts/${tab.name}`}
               >
                 {tab.title}
               </a>

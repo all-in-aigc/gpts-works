@@ -1,4 +1,4 @@
-import { getRecommendedRows, getTotalCount } from "../models/gpts";
+import { getRandRows, getRecommendedRows, getTotalCount } from "../models/gpts";
 
 import Brand from "@/app/components/Brand";
 import Categories from "@/app/components/Categories";
@@ -7,6 +7,7 @@ import GptsList from "@/app/components/GptsList";
 import { Metadata } from "next";
 import ProductHunt from "@/app/components/ProductHunt";
 import Search from "@/app/components/Search";
+import Tab from "../components/Tab";
 import Tips from "@/app/components/Tips";
 
 export const maxDuration = 120;
@@ -21,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getData(): Promise<Gpts[] | undefined> {
-  const gpts_list = await getRecommendedRows(1, 100);
+  const gpts_list = await getRandRows(1, 100);
 
   return gpts_list;
 }
@@ -36,8 +37,8 @@ export default async () => {
       <ProductHunt />
       <Search />
       <Tips />
-      <Categories activeSlug="featured" />
-      {/* <Tab tabValue={tabValue} setTabValue={setTabValue} /> */}
+      {/* <Categories activeSlug="featured" /> */}
+      <Tab />
       {gpts_list && <GptsList gpts={gpts_list} loading={false} />}
     </>
   );

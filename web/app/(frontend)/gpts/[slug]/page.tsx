@@ -13,6 +13,7 @@ import GptsList from "@/app/components/GptsList";
 import { Metadata } from "next";
 import ProductHunt from "@/app/components/ProductHunt";
 import Search from "@/app/components/Search";
+import Tab from "@/app/components/Tab";
 import Tips from "@/app/components/Tips";
 import { findCategoryBySlug } from "@/app/models/categories";
 import { mergeGptsList } from "@/app/utils/gpts";
@@ -39,7 +40,7 @@ export async function generateMetadata({
   return {
     title: title,
     alternates: {
-      canonical: `${process.env.WEB_BASE_URI}/${params.slug}`,
+      canonical: `${process.env.WEB_BASE_URI}/gpts/${params.slug}`,
     },
   };
 }
@@ -108,8 +109,8 @@ export default async ({ params }: { params: { slug: string } }) => {
       <ProductHunt />
       <Search query={query} />
       <Tips />
-      <Categories activeSlug={currentSlug} />
-      {/* <Tab tabValue={tabValue} setTabValue={setTabValue} /> */}
+      {/* <Categories activeSlug={currentSlug} /> */}
+      <Tab />
       {gpts_list && <GptsList gpts={gpts_list} loading={false} />}
     </>
   );
