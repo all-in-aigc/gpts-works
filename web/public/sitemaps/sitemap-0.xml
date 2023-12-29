@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://gpts.works</loc>
+  </url>
+  <url>
+    <loc>https://gpts.works/feed</loc>
+  </url>
+  <url>
+    <loc>https://gpts.works/extension</loc>
+  </url>
+  <url>
+    <loc>https://gpts.works/gpts/latest</loc>
+  </url>
+  <url>
+    <loc>https://gpts.works/gpts/random</loc>
+  </url>
+</urlset>
