@@ -2,7 +2,7 @@ import Ads from "../Ads";
 
 export default () => {
   return (
-    <div className="mb-4 mx-auto text-center flex">
+    <div className="my-2 md:my-6 mx-auto text-center flex">
       <div className="mx-auto flex items-center">
         <a
           href="https://www.producthunt.com/posts/gpts-works?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-gpts&#0045;works"

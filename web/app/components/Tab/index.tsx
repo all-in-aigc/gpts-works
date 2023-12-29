@@ -16,38 +16,40 @@ export default () => {
 
   const tabs: Tab[] = [
     {
-      name: "random",
-      title: "Random",
-      active:
-        pathname === "/" || pathname === "/" || pathname === "/gpts/random",
-    },
-    {
       name: "featured",
       title: "Featured 🔥",
-      active: pathname === "/gpts/featured",
+      route: "/",
+      active:
+        pathname === "/" || pathname === "/" || pathname === "/gpts/featured",
     },
     {
       name: "latest",
       title: "Latest",
+      route: "/gpts/latest",
       active: pathname === "/gpts/latest",
+    },
+    {
+      name: "random",
+      title: "Random",
+      route: "/gpts/random",
+      active: pathname === "/gpts/random",
     },
   ];
 
   return (
     <section className="relative mt-4">
       <div className="mx-auto max-w-7xl px-2 py-4 md:px-8 md:py-4 text-center">
-        <div
-          role="tablist"
-          className="tabs tabs-boxed tabs-sm md:tabs-md inline-block mx-auto"
-        >
+        <div role="tablist" className="mx-auto">
           {tabs.map((tab: Tab, idx: number) => {
             return (
               <a
                 role="tab"
                 key={idx}
-                className={`tab ${tab.active ? "bg-primary text-white" : ""}`}
+                className={`border text-sm rounded-md px-3 py-1 mx-1 ${
+                  tab.active ? "bg-primary border-primary text-white" : ""
+                }`}
                 // onClick={() => router.push(`/gpts/${tab.name}`)}
-                href={`/gpts/${tab.name}`}
+                href={`${tab.route}`}
               >
                 {tab.title}
               </a>

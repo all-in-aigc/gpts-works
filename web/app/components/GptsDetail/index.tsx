@@ -1,15 +1,17 @@
 import { BsChatDots } from "react-icons/bs";
-import Crumb from "../Crumb";
+import Crumb from "@/app/components/Crumb";
 import { Gpts } from "@/app/types/gpts";
-import Preview from "./Preview";
+import GptsList from "../GptsList";
+import Preview from "@/app/components/GptsDetail/Preview";
 import { getGptsTools } from "@/app/services/gpts";
 import moment from "moment";
 
 interface Props {
   gpts: Gpts;
+  random_gpts?: Gpts[];
 }
 
-export default ({ gpts }: Props) => {
+export default ({ gpts, random_gpts }: Props) => {
   const tools = getGptsTools(gpts);
 
   return (
@@ -83,15 +85,13 @@ export default ({ gpts }: Props) => {
             <Preview gpts={gpts} />
           </div>
         </div>
+      </div>
 
-        <div className="flex mt-12">
-          <div className="w-1/2">
-            <h2>Alternative GPTs for {gpts.name}</h2>
-          </div>
-          <div className="w-1/2">
-            <h2>More GPTs by {gpts.name}'s author</h2>
-          </div>
-        </div>
+      <div className="w-full text-center">
+        <h2 className="mx-auto font-bold text-3xl mt-8 mb-4">
+          Other GPTs you may like
+        </h2>
+        {random_gpts && <GptsList gpts={random_gpts} loading={false} />}
       </div>
     </section>
   );

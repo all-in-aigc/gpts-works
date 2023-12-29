@@ -1,13 +1,13 @@
+import { findByUuid, getRandRows } from "@/app/models/gpts";
+
 import { BsDownload } from "react-icons/bs";
 import { Gpts } from "@/app/types/gpts";
 import GptsDetail from "@/app/components/GptsDetail";
 import Image from "next/image";
 import type { Metadata } from "next";
 import extensionSrc from "@/public/extension.png";
-import { findByUuid } from "@/app/models/gpts";
 
 async function getData(slug: string): Promise<Gpts | undefined> {
-  console.log("slug", slug);
   if (!slug || !slug.includes("g-")) {
     return;
   }
@@ -63,11 +63,16 @@ export async function generateMetadata({
 
 export default async ({ params }: { params: { slug: string } }) => {
   const data = await getData(params.slug);
+  const random_gpts_list = await getRandRows(1, 50);
 
   return (
     <section className="relatve">
       <div className="mx-auto w-full max-w-7xl px-5 py-2">
-        {data ? <GptsDetail gpts={data} /> : <>no data</>}
+        {data ? (
+          <GptsDetail gpts={data} random_gpts={random_gpts_list} />
+        ) : (
+          <>no data</>
+        )}
       </div>
     </section>
   );

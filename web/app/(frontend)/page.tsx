@@ -9,6 +9,7 @@ import ProductHunt from "@/app/components/ProductHunt";
 import Search from "@/app/components/Search";
 import Tab from "../components/Tab";
 import Tips from "@/app/components/Tips";
+import { getPromotedGpts } from "../models/order";
 
 export const maxDuration = 120;
 
@@ -21,14 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-async function getData(): Promise<Gpts[] | undefined> {
-  const gpts_list = await getRandRows(1, 100);
-
-  return gpts_list;
-}
-
 export default async () => {
-  const gpts_list = await getData();
+  const promoted_gpts = await getPromotedGpts();
+  const recommended_gpts = await getRecommendedRows(1, 100);
+
   const gpts_count = await getTotalCount();
 
   return (
@@ -39,7 +36,11 @@ export default async () => {
       <Tips />
       {/* <Categories activeSlug="featured" /> */}
       <Tab />
-      {gpts_list && <GptsList gpts={gpts_list} loading={false} />}
+      {promoted_gpts && <GptsList gpts={promoted_gpts} loading={false} />}
+      <div className="mx-auto max-w-7xl -mt-12">
+        <h2 className="text-center font-bold text-3xl">Top Used GPTs</h2>
+      </div>
+      {recommended_gpts && <GptsList gpts={recommended_gpts} loading={false} />}
     </>
   );
 };

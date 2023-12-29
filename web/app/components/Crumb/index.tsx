@@ -26,7 +26,20 @@ export default ({ gpts }: Props) => {
             <a
               className="ml-2 text-md font-medium text-gray-500 hover:text-gray-700"
               aria-current="page"
-              href={renameShortUrl(gpts.short_url, gpts.uuid)}
+              href={"/gpts/random"}
+            >
+              gpts
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <div className="flex items-center">
+            <MdKeyboardArrowRight />
+            <a
+              className="ml-2 text-md font-medium text-gray-500 hover:text-gray-700"
+              aria-current="page"
+              // href={renameShortUrl(gpts.short_url, gpts.uuid)}
             >
               {gpts.name}
             </a>

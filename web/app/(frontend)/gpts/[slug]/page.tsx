@@ -49,17 +49,17 @@ async function getData(slug: string): Promise<Gpts[] | undefined> {
   console.log("gpts slug:", slug);
 
   if (slug === "featured") {
-    const gpts_list = await getRecommendedRows(1, 50);
+    const gpts_list = await getRecommendedRows(1, 100);
     return gpts_list;
   }
 
   if (slug === "latest") {
-    const gpts_list = await getLatestRows(1, 50);
+    const gpts_list = await getLatestRows(1, 100);
     return gpts_list;
   }
 
   if (slug === "random") {
-    const gpts_list = await getRandRows(1, 50);
+    const gpts_list = await getRandRows(1, 100);
     return gpts_list;
   }
 

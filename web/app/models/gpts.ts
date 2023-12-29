@@ -206,21 +206,13 @@ export async function getRecommendedRows(
   }
   const offset = (page - 1) * limit;
 
-  let user_promoted_gpts = await getPromotedGpts();
-  if (!user_promoted_gpts) {
-    user_promoted_gpts = [];
-  }
-  console.log("user_promoted_gpts count: ", user_promoted_gpts.length);
-
   const db = getDb();
   const res = await db.query(
     `SELECT * FROM gpts WHERE is_recommended=true ORDER BY sort DESC LIMIT $1 OFFSET $2`,
     [limit, offset]
   );
 
-  const system_promoted_gpts = getGptsFromSqlResult(res);
-
-  return mergeGptsList(user_promoted_gpts, system_promoted_gpts);
+  return getGptsFromSqlResult(res);
 }
 
 export async function getHotRows(page: number, limit: number): Promise<Gpts[]> {
