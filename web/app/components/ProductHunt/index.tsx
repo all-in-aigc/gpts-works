@@ -18,7 +18,7 @@ export default () => {
           />
         </a>
 
-        <Ads />
+        {/* <Ads /> */}
       </div>
     </div>
   );

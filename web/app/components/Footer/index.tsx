@@ -13,9 +13,7 @@ export default () => {
           </div>
           <div className="max-[767px]: max-[991px]:ml-4 max-[991px]:flex-none max-[767px]:mt-8">
             <div className="mb-4 flex max-w-[272px] items-start justify-start">
-              <p className="text-[#636262] max-[479px]:text-sm">
-                Contact me email to
-              </p>
+              <p className="text-[#636262] max-[479px]:text-sm">Contact me</p>
             </div>
             <div className="mb-4 flex max-w-[272px] items-start justify-start">
               <img
@@ -52,6 +50,18 @@ export default () => {
                 Monica
               </a>
             </p>
+          </div>
+          <div className="max-[991px]: text-left font-semibold max-[991px]:py-1 max-[479px]:mb-4">
+            <p>Products</p>
+            <p>
+              <a
+                href="https://aiwallpaper.shop/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                AI Wallpaper
+              </a>
+            </p>
             <p>
               <a
                 href="https://gptalk.net/chat/new"
@@ -59,6 +69,15 @@ export default () => {
                 target="_blank"
               >
                 GPTalk
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://readknown.cn/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                zKnown
               </a>
             </p>
           </div>
