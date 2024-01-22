@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
+import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -43,11 +44,13 @@ export default function RootLayout({
             <Footer />
           </main>
 
-          <script
+          <Analytics />
+
+          {/* <script
             async
             src="https://chatgpt-umami.vercel.app/script.js"
             data-website-id="c2b6b677-76f4-4003-aa3e-6b54d345fefe"
-          ></script>
+          ></script> */}
         </body>
       </html>
     </ClerkProvider>
