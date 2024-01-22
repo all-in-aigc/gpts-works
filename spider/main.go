@@ -36,7 +36,7 @@ func main() {
 }
 
 func init() {
-	flag.StringVar(&env, "env", "dev", "--env")
+	flag.StringVar(&env, "env", "prod", "--env")
 
 	if err := InitBrowser(); err != nil {
 		log.Fatalf("init browser failed: %v", err)
