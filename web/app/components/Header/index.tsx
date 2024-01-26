@@ -26,6 +26,20 @@ export default () => {
           <ul className="md:flex float-right flex text-lg text-slate-700 mr-4 items-center">
             <li className="mx-4 hidden md:block">
               <a
+                href="/pricing"
+                target="_self"
+                className={
+                  pathname === "/pricing"
+                    ? "text-[#2752f4]"
+                    : "hover:text-[#2752f4]"
+                }
+              >
+                Pricing
+              </a>
+            </li>
+
+            <li className="mx-4 hidden md:block">
+              <a
                 href="/feed"
                 target="_self"
                 className={
