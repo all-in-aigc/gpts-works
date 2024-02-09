@@ -37,9 +37,9 @@ export default async () => {
       {/* <Categories activeSlug="featured" /> */}
       <Tab />
       {promoted_gpts && <GptsList gpts={promoted_gpts} loading={false} />}
-      <div className="mx-auto max-w-7xl -mt-12">
+      {/* <div className="mx-auto max-w-7xl -mt-12">
         <h2 className="text-center font-bold text-3xl">Top Used GPTs</h2>
-      </div>
+      </div> */}
       {recommended_gpts && <GptsList gpts={recommended_gpts} loading={false} />}
     </>
   );

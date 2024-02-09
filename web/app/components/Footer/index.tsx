@@ -55,6 +55,15 @@ export default () => {
             <p>Products</p>
             <p>
               <a
+                href="https://aicover.design/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                AI Cover
+              </a>
+            </p>
+            <p>
+              <a
                 href="https://aiwallpaper.shop/"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
