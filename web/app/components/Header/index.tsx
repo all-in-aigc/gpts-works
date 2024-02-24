@@ -12,12 +12,10 @@ export default () => {
       <div className="flex items-center">
         <p className="text-lg md:text-3xl font-medium ">
           <a
-            className="bg-cover bg-center px-3 py-3 md:px-4 md:py-4 m text-white cursor-pointer"
+            className="flex items-center bg-cover bg-center px-3 py-3 md:px-4 md:py-4 m text-primary cursor-pointer font-bold"
             href="/"
-            style={{
-              backgroundImage: "url('/brand.svg')",
-            }}
           >
+            <img src="/logo.png" className="w-10 h-10 rounded-full border-2 border-slate-300 shadow-lg mr-2" />
             GPTs Works
           </a>
         </p>

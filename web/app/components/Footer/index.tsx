@@ -43,11 +43,20 @@ export default () => {
             <p>Friends</p>
             <p>
               <a
-                href="https://monica.im/"
+                href="https://gptalk.net/chat/new"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
               >
-                Monica
+                GPTalk
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://readknown.cn/"
+                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
+                target="_blank"
+              >
+                zKnown
               </a>
             </p>
           </div>
@@ -73,20 +82,11 @@ export default () => {
             </p>
             <p>
               <a
-                href="https://gptalk.net/chat/new"
+                href="https://sora.fm/"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
               >
-                GPTalk
-              </a>
-            </p>
-            <p>
-              <a
-                href="https://readknown.cn/"
-                className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
-                target="_blank"
-              >
-                zKnown
+                Sora.FM
               </a>
             </p>
           </div>

@@ -81,16 +81,6 @@ export default ({ gpts, random_gpts }: Props) => {
               </a>
             </div>
 
-            <div className="flex flex-col gap-4 font-semibold sm:flex-row">
-              <a
-                href={`https://chat.openai-now.com/g/${gpts.short_url}?utm_source=gptsworks`}
-                target="_blank"
-                className="flex items-center gap-2 rounded-md border border-solid border-black bg-primary text-white px-6 py-3 truncate"
-              >
-                <BsChatDots />
-                <h2>Or Try It Free 🔥</h2>
-              </a>
-            </div>
           </div>
           <div className="min-h-[530px] overflow-hidden rounded-md bg-[#f2f2f7]">
             <Preview gpts={gpts} />
