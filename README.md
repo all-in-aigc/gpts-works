@@ -178,3 +178,8 @@ open `chrome://extensions/`, click `Load unpacked`
 
 <a href="https://www.buymeacoffee.com/idoubi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=all-in-aigc/gpts-works&type=Date)](https://star-history.com/#all-in-aigc/gpts-works&Date)
+
+
