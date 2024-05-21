@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Viewport } from "next";
 
 import Brand from "./components/Brand";
 import { Gpts } from "./types/gpts";
@@ -8,6 +9,17 @@ import GptsList from "./components/GptsList";
 import ProductHunt from "./components/ProductHunt";
 import Search from "./components/Search";
 import Tab from "./components/Tab";
+
+
+// https://github.com/tailwindlabs/tailwindcss/issues/1193
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  minimumScale: 1,
+};
+
 
 export default () => {
   const [gpts, setGpts] = useState<Gpts[]>([]);
