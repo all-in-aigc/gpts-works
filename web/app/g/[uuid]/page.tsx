@@ -19,7 +19,7 @@ export default async ({ params }: { params: { uuid: string } }) => {
   const data = await getData(params.uuid);
 
   return (
-    <section className="relatve">
+    <section className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-2">
         {data && <GptsDetail gpts={data} />}
       </div>

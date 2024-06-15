@@ -4,7 +4,7 @@ import extensionSrc from "@/public/extension.png";
 
 export default () => {
   return (
-    <section className="relatve">
+    <section className="relative">
       <div className="mx-auto w-full max-w-7xl px-5 py-2">
         <h2 className="mb-4 text-3xl font-bold md:text-7xl text-center mt-8 md:mt-24">
           Third-party GPTs shows on browser sidebar

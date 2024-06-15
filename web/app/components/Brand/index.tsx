@@ -6,7 +6,7 @@ interface Props {
 
 export default ({ count }: Props) => {
   return (
-    <section className="relatve">
+    <section className="relative">
       <div className="mx-auto w-full max-w-7xl px-4 mt-12 md:mt-24">
         <div className="mx-auto w-full max-w-6xl text-center">
           <h2 className="text-3xl font-bold md:text-7xl">
