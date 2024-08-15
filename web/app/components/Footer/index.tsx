@@ -43,20 +43,20 @@ export default () => {
             <p>Friends</p>
             <p>
               <a
-                href="https://gptalk.net/chat/new"
+                href="https://thinkany.ai?utm_source=gpts.works"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
               >
-                GPTalk
+                ThinkAny AI Search
               </a>
             </p>
             <p>
               <a
-                href="https://readknown.cn/"
+                href="https://heybeauty.ai?utm_source=gpts.works"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
               >
-                zKnown
+                HeyBeauty AI Try-On
               </a>
             </p>
           </div>
@@ -82,7 +82,7 @@ export default () => {
             </p>
             <p>
               <a
-                href="https://sora.fm/"
+                href="https://sora.trys.ai/"
                 className="inline-block py-1.5 font-normal text-[#276EF1] transition hover:text-[#276EF1]"
                 target="_blank"
               >
