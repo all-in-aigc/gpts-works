@@ -68,7 +68,7 @@ export default ({ setGpts, setLoading }: Props) => {
   }, [content]);
 
   return (
-    <section className="relatve mt-4 md:mt-8">
+    <section className="relative mt-4 md:mt-8">
       <div className="mx-auto w-full max-w-2xl px-6 text-center">
         <div className="flex items-center relative">
           <input

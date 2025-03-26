@@ -60,7 +60,7 @@ export default ({ setGpts, setLoading }: Props) => {
   }
 
   return (
-    <section className="relatve">
+    <section className="relative">
       <div className="mx-auto w-full max-w-3xl px-5 py-2 md:px-4 pt-2 pb-4 md:pt-4 lg:pt-4 text-center">
         <div className="flex items-center">
           <input
