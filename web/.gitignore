@@ -36,4 +36,6 @@ data/data.sql
 *.tsbuildinfo
 next-env.d.ts
 
+.DS_Store
+
 data/*
